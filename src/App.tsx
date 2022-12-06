@@ -9,7 +9,7 @@ const App: FC = () => {
       <header>
         <Link to={'/'}><h1>Drinkos</h1></Link>
         <nav>
-          {/* <Link to={'home'}>Home</Link> */}
+          {/* <Link to={'/'}>Home</Link> */}
         </nav>
       </header>
       <hr />

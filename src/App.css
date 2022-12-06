@@ -2,9 +2,15 @@
   font-family: AustralisProBoldItalic;
   src: url("./assets/fonts/AustrProBolIta.otf");
 }
+
 body {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+img {
+  display: block;
+  width: 100%;
 }
 
 a {

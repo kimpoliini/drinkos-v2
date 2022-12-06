@@ -1,0 +1,15 @@
+.drink-list-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.drink-list-item>p {
+    text-align: center;
+}
+
+.drink-list-item img {
+ border-radius: 4px;
+}
