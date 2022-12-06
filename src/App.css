@@ -1,22 +1,36 @@
-
 @font-face {
   font-family: AustralisProBoldItalic;
   src: url("./assets/fonts/AustrProBolIta.otf");
-  color: black;
+}
+body {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 header {
-  font-family: AustralisProBoldItalic;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  flex-direction: column;
   display: flex;
-  justify-content: space-around;
-  color: white;
+  justify-content: space-between;
+  align-items: center;
   min-height: 8vh;
 }
 
-header > h1 {
+header h1 {
+  font-family: AustralisProBoldItalic;
   font-size: 32pt;
   color: #404653;
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+  font-size: 24pt;
+}
+
+.content {
+  padding: 2rem;
 }

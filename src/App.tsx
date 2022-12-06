@@ -1,17 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FC } from 'react';
 import './App.css';
+import { Outlet, Link } from "react-router-dom";
 
-function App() {
+
+const App: FC = () => {
   return (
     <div className="App">
       <header>
-        <h1>Drinkos</h1>
+        <Link to={'/'}><h1>Drinkos</h1></Link>
         <nav>
-
+          {/* <Link to={'home'}>Home</Link> */}
         </nav>
-        <hr style={{width: "100%"}}/>
       </header>
+      <hr />
+      <main className='content'>
+        <Outlet />
+      </main>
     </div>
   );
 }
