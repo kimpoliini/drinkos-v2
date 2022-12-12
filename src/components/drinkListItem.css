@@ -10,6 +10,10 @@
     text-align: center;
 }
 
+.drink-list-item div {
+    width: 100%;
+}
+
 .drink-list-item img {
- border-radius: 4px;
+    border-radius: 4px;
 }

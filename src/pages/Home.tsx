@@ -43,13 +43,16 @@ const Home: FC = () => {
 
 
   return (
-    <div className='drink-grid'>
-      {drinks.map((e: IDrinkListItem) => {
-        // console.log(e);
+    <div>
+      <h2>Popular drinks</h2>
+      <div className='drink-grid'>
+        {drinks.map((e: IDrinkListItem) => {
+          // console.log(e);
 
-        return <DrinkListItem key={e.id} id={e.id}
-          name={e.name} thumbnail={e.thumbnail} ingredients={e.ingredients} measurements={e.measurements} />
-      })}
+          return <DrinkListItem key={e.id} id={e.id}
+            name={e.name} thumbnail={e.thumbnail} ingredients={e.ingredients} measurements={e.measurements} />
+        })}
+      </div>
     </div>
   )
 }

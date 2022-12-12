@@ -20,9 +20,11 @@ a {
 
 header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  min-height: 8vh;
+  min-height: 6vh;
+  padding-bottom: 1rem;
 }
 
 header h1 {
@@ -33,10 +35,38 @@ header h1 {
 
 nav {
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   font-size: 24pt;
+  text-align: center;
 }
 
 .content {
-  padding: 2rem;
+  padding-top: 2rem;
+}
+
+@media screen and (min-width: 500px) {
+  header {
+    justify-content: space-between;
+  }
+  nav {
+    flex-direction: row;
+    gap: 2rem;
+    
+  }
+}
+
+@media screen and (min-width: 768px) {
+  header {
+    justify-content: space-between;
+    flex-direction: row;
+    padding-bottom: 0;
+
+  }
+  nav {
+    flex-direction: row;
+    gap: 2rem;
+    
+  }
 }

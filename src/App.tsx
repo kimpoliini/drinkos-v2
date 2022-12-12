@@ -9,7 +9,9 @@ const App: FC = () => {
       <header>
         <Link to={'/'}><h1>Drinkos</h1></Link>
         <nav>
-          {/* <Link to={'/'}>Home</Link> */}
+          <Link to={'/'}>Link one</Link>
+          <Link to={'/'}>Link two</Link>
+          <Link to={'/'}>Link three</Link>
         </nav>
       </header>
       <hr />
