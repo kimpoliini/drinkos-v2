@@ -6,6 +6,9 @@
 body {
   padding-left: 2rem;
   padding-right: 2rem;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 img {
@@ -53,7 +56,6 @@ nav {
   nav {
     flex-direction: row;
     gap: 2rem;
-    
   }
 }
 
@@ -67,6 +69,9 @@ nav {
   nav {
     flex-direction: row;
     gap: 2rem;
-    
+  }
+
+  p {
+    font-size: 14pt;
   }
 }
