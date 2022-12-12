@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
 import './drinkListItem.css'
 
 export interface IDrinkListItem {
@@ -13,7 +14,9 @@ const DrinkListItem: FC<IDrinkListItem> = (props) => {
     return (
         <div className='drink-list-item'>
             <div>
-                <img src={props.thumbnail + "/preview"} alt={props.name} />
+                <Link to={`/${props.id}`}>
+                    <img src={props.thumbnail + "/preview"} alt={props.name} />
+                </Link>
             </div>
             <p>{props.name}</p>
         </div>

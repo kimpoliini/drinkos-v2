@@ -3,6 +3,14 @@
   src: url("./assets/fonts/AustrProBolIta.otf");
 }
 
+/* Prevents the content from shifting ever so slightly when
+navigating to a page that doesn't scroll vertically */
+html {
+  width: 100vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 body {
   padding-left: 2rem;
   padding-right: 2rem;
@@ -19,6 +27,11 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+hr {
+  margin-left: 4%;
+  margin-right: 4%;
 }
 
 header {

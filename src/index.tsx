@@ -8,6 +8,7 @@ import {
   RouterProvider,
   createHashRouter,
 } from "react-router-dom";
+import DrinkInfo from './pages/DrinkInfo';
 
 const router = createHashRouter([
   {
@@ -17,6 +18,10 @@ const router = createHashRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/:id",
+        element: <DrinkInfo />,
       },
     ]
   }
