@@ -1,0 +1,10 @@
+.drink-info {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.drink-info img {
+    border-radius: 4px;
+    width: 100%;
+}

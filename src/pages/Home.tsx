@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { FC, useEffect, useState } from 'react'
 import DrinkListItem, { IDrinkListItem } from '../components/DrinkListItem'
+import { baseUrl } from '../config/api'
 import { apiKey } from '../config/apiKey'
 import './home.css'
 
@@ -9,9 +10,9 @@ const Home: FC = () => {
   const [drinks, setDrinks] = useState<IDrinkListItem[]>([])
 
   useEffect(() => {
-    axios.get(`https://www.thecocktaildb.com/api/json/v2/${apiKey}/popular.php`)
+    axios.get(`${baseUrl + apiKey}/popular.php`)
       .then(resp => {
-        console.log(resp);
+        // console.log(resp);
         let newDrinks = resp.data.drinks.map((e: any) => {
 
           let ingredients: string[] = []

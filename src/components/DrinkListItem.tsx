@@ -5,7 +5,7 @@ import './drinkListItem.css'
 export interface IDrinkListItem {
     id: string,
     name: string,
-    thumbnail: string,
+    thumbnail?: string,
     ingredients: string[],
     measurements: string[],
 }
