@@ -62,8 +62,18 @@ function DrinkInfo() {
     return (
         <div className='drink-info'>
             <img src={drink?.image} alt={drink?.name} />
-            <h2>{drink?.name}</h2>
-            <p>{drink?.instructions}</p>
+            <h2 style={{ fontWeight: "normal" }}>{drink?.name}</h2>
+            <div className='ingredients'>
+                <p>Ingredients</p>
+                <ul>
+                    {drink?.ingredients.map((e: string, i) =>
+                        <li>{`${drink?.measurements[i] ? drink?.measurements[i] : ""} ${e}`}</li>
+                    )}
+                </ul>
+                
+                <p>Instructions</p>
+                <p>{drink?.instructions}</p>
+            </div>
         </div>
     )
 }

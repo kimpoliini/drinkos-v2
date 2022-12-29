@@ -8,3 +8,31 @@
     border-radius: 4px;
     width: 100%;
 }
+
+.ingredients p {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.ingredients {
+    padding: 1px;
+    border-radius: 4px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.ingredients li:nth-child(1) {
+    border-top: 1px solid lightgray;
+}
+
+.ingredients li {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 0.75rem;
+    padding-left: 1rem;
+    border-bottom: 1px solid lightgray;
+}
