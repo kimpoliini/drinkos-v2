@@ -11,7 +11,7 @@ const App: FC = () => {
         <nav>
           <Link to={'/'}>Link one</Link>
           <Link to={'/'}>Link two</Link>
-          <Link to={'/'}>Link three</Link>
+          <Link to={'/contact/'}>Contact</Link>
         </nav>
       </header>
       <hr />

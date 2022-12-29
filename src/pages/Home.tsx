@@ -45,7 +45,7 @@ const Home: FC = () => {
 
   return (
     <div className='home'>
-      <h2 style={{marginTop: 0}}>Popular drinks</h2>
+      <h2 style={{marginTop: 0, fontWeight: "normal"}}>Popular drinks</h2>
       <div className='drink-grid'>
         {drinks.map((e: IDrinkListItem) => {
           // console.log(e);
