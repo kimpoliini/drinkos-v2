@@ -29,6 +29,12 @@ a {
   text-decoration: none;
 }
 
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 hr {
   margin-left: 4%;
   margin-right: 4%;
@@ -58,8 +64,23 @@ nav {
   text-align: center;
 }
 
-.content {
+main {
   padding-top: 2rem;
+  padding-bottom: 2rem;
+  flex: 1;
+}
+
+footer {
+  margin-left: -2rem;
+  margin-right: 4rem;
+  width: 100%;
+  padding: 2rem;
+  background-color: #404653;
+  overflow: hidden;
+}
+
+footer > div {
+  color: lightgray;
 }
 
 @media screen and (min-width: 500px) {

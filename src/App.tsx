@@ -15,9 +15,20 @@ const App: FC = () => {
         </nav>
       </header>
       <hr />
-      <main className='content'>
+
+      <main>
         <Outlet />
       </main>
+
+      <footer>
+        <div>
+          <span>Contact</span>
+          <br />
+          <span>About</span>
+          <br />
+          <span>Suggest a change</span>
+        </div>
+      </footer>
     </div>
   );
 }
