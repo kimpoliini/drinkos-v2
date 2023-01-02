@@ -5,6 +5,8 @@
 }
 
 .drink-info img {
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 4px;
     width: 100%;
 }
@@ -12,6 +14,11 @@
 .ingredients p {
     margin-left: 1rem;
     margin-right: 1rem;
+    font-size: 12pt;
+}
+
+.ingredients h3 {
+    font-weight: normal;
 }
 
 .ingredients {
@@ -30,9 +37,16 @@ ul {
 }
 
 .ingredients li {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    /* margin-left: 1rem; */
+    /* margin-right: 1rem; */
     padding: 0.75rem;
     padding-left: 1rem;
     border-bottom: 1px solid lightgray;
 }
+
+@media screen and (min-width: 500px) {
+    .drink-info img{
+        max-width: 40vw;
+    }
+  }
+  

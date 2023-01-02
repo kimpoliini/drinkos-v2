@@ -64,14 +64,14 @@ function DrinkInfo() {
             <img src={drink?.image} alt={drink?.name} />
             <h2 style={{ fontWeight: "normal" }}>{drink?.name}</h2>
             <div className='ingredients'>
-                <p>Ingredients</p>
+                <h3>Ingredients</h3>
                 <ul>
                     {drink?.ingredients.map((e: string, i) =>
                         <li>{`${drink?.measurements[i] ? drink?.measurements[i] : ""} ${e}`}</li>
                     )}
                 </ul>
                 
-                <p>Instructions</p>
+                <h3>Instructions</h3>
                 <p>{drink?.instructions}</p>
             </div>
         </div>
