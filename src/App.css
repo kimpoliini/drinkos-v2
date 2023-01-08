@@ -7,16 +7,11 @@
 navigating to a page that doesn't scroll vertically */
 html {
   width: 100vw;
-  overflow-y: scroll;
   overflow-x: hidden;
 }
 
 body {
-  padding-left: 2rem;
-  padding-right: 2rem;
-  max-width: 1024px;
-  margin-left: auto;
-  margin-right: auto;
+  overflow: hidden;
 }
 
 img {
@@ -30,6 +25,12 @@ a {
 }
 
 .App {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -71,9 +72,6 @@ main {
 }
 
 footer {
-  margin-left: -2rem;
-  margin-right: 4rem;
-  width: 100%;
   padding: 2rem;
   background-color: #404653;
   overflow: hidden;
@@ -81,12 +79,16 @@ footer {
 
 footer > div {
   color: lightgray;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media screen and (min-width: 500px) {
   header {
     justify-content: space-between;
   }
+
   nav {
     flex-direction: row;
     gap: 2rem;
@@ -100,6 +102,7 @@ footer > div {
     padding-bottom: 0;
 
   }
+
   nav {
     flex-direction: row;
     gap: 2rem;

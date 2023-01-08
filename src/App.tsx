@@ -5,20 +5,22 @@ import { Outlet, Link } from "react-router-dom";
 
 const App: FC = () => {
   return (
-    <div className="App">
-      <header>
-        <Link to={'/'}><h1>Drinkos</h1></Link>
-        <nav>
-          <Link to={'/'}>Link one</Link>
-          <Link to={'/'}>Link two</Link>
-          <Link to={'/contact/'}>Contact</Link>
-        </nav>
-      </header>
-      <hr />
+    <div>
+      <div className="App">
+        <header>
+          <Link to={'/'}><h1>Drinkos</h1></Link>
+          <nav>
+            <Link to={'/'}>Link one</Link>
+            <Link to={'/'}>Link two</Link>
+            <Link to={'/contact/'}>Contact</Link>
+          </nav>
+        </header>
+        <hr />
 
-      <main>
-        <Outlet />
-      </main>
+        <main>
+          <Outlet />
+        </main>
+      </div>
 
       <footer>
         <div>
