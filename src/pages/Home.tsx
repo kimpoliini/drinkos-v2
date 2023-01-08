@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { FC, useEffect, useState } from 'react'
 import DrinkListItem, { IDrinkListItem } from '../components/DrinkListItem'
+import TextLine from '../components/TextLine'
 import { baseUrl } from '../config/api'
 import { apiKey } from '../config/apiKey'
 import './home.css'
@@ -45,7 +46,10 @@ const Home: FC = () => {
 
   return (
     <div className='home'>
-      <h2 style={{marginTop: 0, fontWeight: "normal"}}>Popular drinks</h2>
+      <div style={{ display: 'flex', marginBottom: "2rem" }}>
+        <TextLine text='Popular drinks' style={{ fontWeight: "normal" }} color="#404653" lineColor="#a8b0c0"/>
+
+      </div>
       <div className='drink-grid'>
         {drinks.map((e: IDrinkListItem) => {
           // console.log(e);

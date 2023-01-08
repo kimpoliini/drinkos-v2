@@ -5,7 +5,7 @@ import { Outlet, Link } from "react-router-dom";
 
 const App: FC = () => {
   return (
-    <div>
+    <div className='app-wrapper'>
       <div className="App">
         <header>
           <Link to={'/'}><h1>Drinkos</h1></Link>
@@ -15,7 +15,7 @@ const App: FC = () => {
             <Link to={'/contact/'}>Contact</Link>
           </nav>
         </header>
-        <hr />
+        {/* <hr /> */}
 
         <main>
           <Outlet />
