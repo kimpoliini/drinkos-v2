@@ -5,7 +5,8 @@ export const baseUrl = "https://www.thecocktaildb.com/api/json/v2/"
 export const getDrinksFromUrl = async (url: string) => {
     const promise = new Promise<IDrinkListItem[]>( (resolve, reject) => {
         resolve( axios.get(url)
-            .then(resp => {
+            .then(resp => {                
+                if(!resp.data.drinks) return []
                 let drinks: IDrinkListItem[] = resp.data.drinks.map((e: any) => {
 
                     let ingredients: string[] = []

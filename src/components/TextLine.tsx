@@ -15,8 +15,6 @@ const TextLine: FC<ITextLine> = (props) => {
         color: (props.color ? props.color : "black"),
     }
 
-    console.log(textLineStyle);
-
     return (
         <h2 className='text-line'
             style={textLineStyle}>

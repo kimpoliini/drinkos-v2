@@ -48,6 +48,10 @@ input {
     margin-right: 1rem;
 }
 
+.hidden {
+    display: none;
+}
+
 @media screen and (min-width: 500px) {
     .search-results {
         margin-left: 2rem;
