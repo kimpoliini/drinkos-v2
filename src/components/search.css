@@ -1,0 +1,38 @@
+.search-bar {
+    display: flex;
+
+    border-bottom: 1px solid #a8b0c0;
+    /* border: 1px solid #a8b0c0; */
+    /* border-radius: 6px; */
+    overflow: hidden;
+    padding-left: 4px;
+}
+
+input {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.search-bar img {
+    user-select: none;
+    margin-left: 4px;
+    width: 32px;
+    height: 32px;
+}
+
+.search-bar>div {
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.search-bar>div:hover {
+    background-color: #a8b0c0;
+}
+
+.search-bar>div:hover>img {
+    filter: brightness(10);
+}
+
+@media screen and (min-width: 768px) {}

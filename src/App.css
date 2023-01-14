@@ -31,13 +31,10 @@ a {
 }
 
 .App {
-  width: 100%;
+  /* width: 100%; */
+  max-width: 1024px;
   padding-left: 2rem;
   padding-right: 2rem;
-  max-width: 1024px;
-  margin-left: auto;
-  margin-right: auto;
-
 
   flex: 1;
   display: flex;
@@ -69,8 +66,9 @@ nav {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  font-size: 20pt;
+  font-size: 16pt;
   text-align: center;
+  color: #404653;
 }
 
 main {
@@ -93,6 +91,11 @@ footer>div {
 }
 
 @media screen and (min-width: 500px) {
+  .App {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   header {
     justify-content: space-between;
   }
@@ -104,16 +107,18 @@ footer>div {
 }
 
 @media screen and (min-width: 768px) {
+
+
   header {
     justify-content: space-between;
     flex-direction: row;
     padding-bottom: 0;
-
+    gap: 2rem;
   }
 
   nav {
     flex-direction: row;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   p {

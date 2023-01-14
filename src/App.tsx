@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import './App.css';
 import { Outlet, Link } from "react-router-dom";
+import Search from './components/Search';
 
 
 const App: FC = () => {
@@ -12,7 +13,10 @@ const App: FC = () => {
           <nav>
             <Link to={'/'}>Link one</Link>
             <Link to={'/'}>Link two</Link>
-            <Link to={'/contact/'}>Contact</Link>
+            <Link to={'/'}>Link three</Link>
+
+            
+            <Search />
           </nav>
         </header>
         {/* <hr /> */}
