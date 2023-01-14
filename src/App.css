@@ -6,7 +6,7 @@
 /* Prevents the content from shifting ever so slightly when
 navigating to a page that doesn't scroll vertically */
 html {
-  width: 100vw;
+  /* width: 100vw; */
   overflow-x: hidden;
 }
 
