@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import DrinkInfo from './pages/DrinkInfo';
 import Contact from './pages/Contact';
+import Latest from './pages/Latest';
 
 const router = createHashRouter([
   {
@@ -25,8 +26,8 @@ const router = createHashRouter([
         element: <DrinkInfo />,
       },
       {
-        path: "/contact/",
-        element: <Contact />,
+        path: "/latest/",
+        element: <Latest />,
       },
     ]
   }

@@ -59,6 +59,20 @@ function DrinkInfo() {
             })
     }, [id])
 
+    const formatMeasure = (measure: string) => {
+        measure = measure.toLowerCase()
+
+        switch (measure) {
+            case "dash":
+                return "Dash of"
+            case "top":
+                return "Top with"
+            default:
+                return  measure.charAt(0).toUpperCase() + measure.slice(1)
+        }
+
+    }
+
     return (
         <div className='drink-info'>
             <img src={drink?.image} alt={drink?.name} />
@@ -67,10 +81,10 @@ function DrinkInfo() {
                 <h3>Ingredients</h3>
                 <ul>
                     {drink?.ingredients.map((e: string, i) =>
-                        <li>{`${drink?.measurements[i] ? drink?.measurements[i] : ""} ${e}`}</li>
+                        <li>{`${drink?.measurements[i] ? formatMeasure(drink?.measurements[i]) : ""} ${e}`}</li>
                     )}
                 </ul>
-                
+
                 <h3>Instructions</h3>
                 <p>{drink?.instructions}</p>
             </div>

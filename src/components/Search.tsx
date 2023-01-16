@@ -54,11 +54,9 @@ const Search: FC = () => {
 
     let results = arr.map((e: IDrinkListItem, i) => {
       return (
-        // <div key={i} className="search-result-item">
-          <Link to={`/${e.id}`} className="search-result-item">
+          <Link to={`/${e.id}`} key={i} className="search-result-item">
             <p>{e.name}</p>
           </Link>
-        // </div>
       )
     })
 
