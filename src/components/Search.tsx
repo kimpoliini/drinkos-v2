@@ -4,7 +4,7 @@ import { ReactImageTint } from 'react-image-tint';
 import { IDrinkListItem } from './DrinkListItem';
 import { baseUrl, getDrinksFromUrl } from '../config/api';
 import { apiKey } from '../config/apiKey';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const Search: FC = () => {
 
@@ -12,6 +12,7 @@ const Search: FC = () => {
   const [showResults, setShowResults] = useState<boolean>(true)
   const [hasQuery, setHasQuery] = useState<boolean>(false)
   const elementRefs = useRef<{ app: Element; searchResults: Element }>()
+  let { id } = useParams()
 
   useEffect(() => {
     let app = document.querySelector(".App")
@@ -23,6 +24,10 @@ const Search: FC = () => {
 
     elementRefs.current = { app: app!, searchResults: searchResults! }
   }, [])
+
+  useEffect(()=>{
+    setShowResults(false)    
+  },[id])
 
   const updateResultsPosition = () => {
     let width = window.innerWidth
