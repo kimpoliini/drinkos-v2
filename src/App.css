@@ -31,10 +31,11 @@ a {
 }
 
 .App {
-  /* width: 100%; */
+  width: 100%;
   max-width: 1024px;
   padding-left: 2rem;
   padding-right: 2rem;
+  box-sizing: border-box;
 
   flex: 1;
   display: flex;
@@ -75,6 +76,7 @@ main {
   padding-top: 2rem;
   padding-bottom: 2rem;
   flex: 1;
+  /* width: 100%; */
 }
 
 footer {

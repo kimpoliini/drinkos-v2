@@ -57,7 +57,7 @@ function DrinkInfo() {
                 setDrink(drink)
 
             })
-    }, [])
+    }, [id])
 
     return (
         <div className='drink-info'>
