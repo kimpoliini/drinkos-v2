@@ -25,9 +25,9 @@ const Search: FC = () => {
     elementRefs.current = { app: app!, searchResults: searchResults! }
   }, [])
 
-  useEffect(()=>{
-    setShowResults(false)    
-  },[id])
+  useEffect(() => {
+    setShowResults(false)
+  }, [id])
 
   const updateResultsPosition = () => {
     let width = window.innerWidth
@@ -49,17 +49,31 @@ const Search: FC = () => {
     }
   }
 
-  const renderSearchResults = (arr: IDrinkListItem[]) => {
-    if (arr.length > 10) arr.length = 10
+  const renderSearchResults = () => {
+    let arr = [...drinks]
+    let showMore = false
+
+    if (arr.length > 8) {
+      showMore = true
+      arr.length = 8
+    }
 
     let results = arr.map((e: IDrinkListItem, i) => {
       return (
-          <Link to={`/${e.id}`} key={i} className="search-result-item">
-            <p>{e.name}</p>
-          </Link>
+        <Link to={`/${e.id}`} key={i} className="search-result-item">
+          <p>{e.name}</p>
+        </Link>
       )
     })
 
+    if (showMore) {
+      results.push(
+        <Link to={`/search?q=`} className="search-result-item">
+          <p style={{textAlign: "center"}}>Show all {drinks.length} results</p>
+        </Link>
+      )
+    }
+    
     return results
   }
 
@@ -77,10 +91,10 @@ const Search: FC = () => {
           onFocus={() => setShowResults(true)}
           onChange={(e) => {
             let query = e.target.value
-            if (query.length >= 3) {
+            if (query.trim().length >= 3) {
               updateResultsPosition()
 
-              let url = `${baseUrl + apiKey}/search.php?s=${query}`
+              let url = `${baseUrl + apiKey}/search.php?s=${query.trimStart()}`
               getDrinksFromUrl(url).then(drinks => {
                 setDrinks(drinks)
                 setHasQuery(true)
@@ -95,7 +109,7 @@ const Search: FC = () => {
         </div>
       </div>
       <div className={"search-results " + (showResults ? "" : "hidden")}>
-        {drinks.length > 0 ? renderSearchResults(drinks)
+        {drinks.length > 0 ? renderSearchResults()
           : (hasQuery ? <p>No results</p> : null)}
       </div>
     </div>
