@@ -14,7 +14,7 @@ const DrinkListItem: FC<IDrinkListItem> = (props) => {
     return (
         <div className='drink-list-item'>
             <div>
-                <Link to={`/${props.id}`}>
+                <Link to={`/drink/${props.id}`}>
                     <img src={props.thumbnail + "/preview"} alt={props.name} />
                 </Link>
             </div>

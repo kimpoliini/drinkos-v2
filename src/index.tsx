@@ -11,6 +11,7 @@ import {
 import DrinkInfo from './pages/DrinkInfo';
 import Contact from './pages/Contact';
 import Latest from './pages/Latest';
+import Search from './pages/Search';
 
 const router = createHashRouter([
   {
@@ -18,16 +19,20 @@ const router = createHashRouter([
     element: <App />,
     children: [
       {
+        path: "/drink/:id",
+        element: <DrinkInfo />,
+      },
+      {
         path: "/",
         element: <Home />,
       },
       {
-        path: "/:id",
-        element: <DrinkInfo />,
-      },
-      {
         path: "/latest/",
         element: <Latest />,
+      },
+      {
+        path: "/search/",
+        element: <Search />,
       },
     ]
   }

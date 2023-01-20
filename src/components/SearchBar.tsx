@@ -1,16 +1,17 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import './search.css'
+import './searchBar.css'
 import { ReactImageTint } from 'react-image-tint';
 import { IDrinkListItem } from './DrinkListItem';
 import { baseUrl, getDrinksFromUrl } from '../config/api';
 import { apiKey } from '../config/apiKey';
 import { Link, useParams } from 'react-router-dom';
 
-const Search: FC = () => {
+const SearchBar: FC = () => {
 
   const [drinks, setDrinks] = useState<IDrinkListItem[]>([])
   const [showResults, setShowResults] = useState<boolean>(true)
-  const [hasQuery, setHasQuery] = useState<boolean>(false)
+  // const [hasQuery, setHasQuery] = useState<boolean>(false)
+  const [query, setQuery] = useState<string>("")
   const elementRefs = useRef<{ app: Element; searchResults: Element }>()
   let { id } = useParams()
 
@@ -60,7 +61,7 @@ const Search: FC = () => {
 
     let results = arr.map((e: IDrinkListItem, i) => {
       return (
-        <Link to={`/${e.id}`} key={i} className="search-result-item">
+        <Link to={`/drink/${e.id}`} key={i} className="search-result-item">
           <p>{e.name}</p>
         </Link>
       )
@@ -68,12 +69,12 @@ const Search: FC = () => {
 
     if (showMore) {
       results.push(
-        <Link to={`/search?q=`} className="search-result-item">
-          <p style={{textAlign: "center"}}>Show all {drinks.length} results</p>
+        <Link to={`/search?q=${query}`} key={arr.length + 1} className="search-result-item">
+          <p style={{ textAlign: "center" }}>Show all {drinks.length} results</p>
         </Link>
       )
     }
-    
+
     return results
   }
 
@@ -90,31 +91,33 @@ const Search: FC = () => {
         <input placeholder='Search drinks...'
           onFocus={() => setShowResults(true)}
           onChange={(e) => {
-            let query = e.target.value
-            if (query.trim().length >= 3) {
+            let newQuery = e.target.value
+            if (newQuery.trim().length >= 3) {
               updateResultsPosition()
 
-              let url = `${baseUrl + apiKey}/search.php?s=${query.trimStart()}`
+              let url = `${baseUrl + apiKey}/search.php?s=${newQuery.trimStart()}`
               getDrinksFromUrl(url).then(drinks => {
                 setDrinks(drinks)
-                setHasQuery(true)
+                setQuery(newQuery)
               })
             } else {
-              setHasQuery(false)
+              setQuery("")
               setDrinks([])
             }
           }} />
         <div>
-          <ReactImageTint src={require('../assets/icons/search.png')} color="#a8b0c0" />
+          <Link to={`/search?q=${query}`}>
+            <ReactImageTint src={require('../assets/icons/search.png')} color="#a8b0c0" />
+          </Link>
         </div>
       </div>
       <div className={"search-results " + (showResults ? "" : "hidden")}>
         {drinks.length > 0 ? renderSearchResults()
-          : (hasQuery ? <p>No results</p> : null)}
+          : (query !== "" ? <p>No results</p> : null)}
       </div>
     </div>
 
   )
 }
 
-export default Search
+export default SearchBar
