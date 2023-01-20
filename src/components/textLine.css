@@ -1,12 +1,22 @@
-.text-line {
-    width: 100%; 
-    text-align: center; 
-    /* border-bottom: 1px solid #000;  */
-    line-height: 0.1em;
-    margin: 10px 0 20px; 
- } 
-
- .text-line span { 
-    background:#fff; 
-    padding:0 10px; 
+.text-line{
+    overflow: hidden;
+    text-align: center;
+}
+.text-line > span{
+   position: relative;
+   display: inline-block;
+}
+.text-line > span:before, .text-line > span:after{
+   content: '';
+   position: absolute;
+   top: 50%;
+   border-bottom: var(--line);
+   width: 591px; /* half of limiter*/
+   margin: 0 16px;
+}
+.text-line > span:before{
+   right: 100%;
+}
+.text-line > span:after{
+   left: 100%;
 }

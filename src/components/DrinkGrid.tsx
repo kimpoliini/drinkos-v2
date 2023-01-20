@@ -20,9 +20,8 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
 
     return (
         <div>
-            <div style={{ display: 'flex', marginBottom: "2rem" }}>
-                <TextLine text={props.title} style={{ fontWeight: "normal" }} color="#404653" lineColor="#a8b0c0" />
-            </div>
+            <TextLine text={props.title} style={{ fontWeight: "normal" }} color="#404653" lineColor="#a8b0c0" />
+            
             <div className='drink-grid'>
                 {drinks.map((e: IDrinkListItem) => {
                     return <DrinkListItem key={e.id} id={e.id}

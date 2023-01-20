@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { IDrinkListItem } from '../components/DrinkListItem'
+import TextLine from '../components/TextLine'
 import { baseUrl } from '../config/api'
 import { apiKey } from '../config/apiKey'
 import './drinkInfo.css'
@@ -68,7 +69,7 @@ function DrinkInfo() {
             case "top":
                 return "Top with"
             default:
-                return  measure.charAt(0).toUpperCase() + measure.slice(1)
+                return measure.charAt(0).toUpperCase() + measure.slice(1)
         }
 
     }
@@ -76,12 +77,13 @@ function DrinkInfo() {
     return (
         <div className='drink-info'>
             <img src={drink?.image} alt={drink?.name} />
-            <h2 style={{ fontWeight: "normal" }}>{drink?.name}</h2>
+            <TextLine text={drink?.name || ""} color="#404653" lineColor="#a8b0c0"
+                style={{ fontWeight: "normal" }} />
             <div className='ingredients'>
                 <h3>Ingredients</h3>
                 <ul>
                     {drink?.ingredients.map((e: string, i) =>
-                        <li>{`${drink?.measurements[i] ? formatMeasure(drink?.measurements[i]) : ""} ${e}`}</li>
+                        <li key={i}>{`${drink?.measurements[i] ? formatMeasure(drink?.measurements[i]) : ""} ${e}`}</li>
                     )}
                 </ul>
 

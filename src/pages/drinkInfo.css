@@ -11,20 +11,21 @@
     width: 100%;
 }
 
-.ingredients p {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    font-size: 12pt;
+.ingredients {
+    padding: 1px;
+    border-radius: 4px;
 }
 
 .ingredients h3 {
     font-weight: normal;
 }
 
-.ingredients {
-    padding: 1px;
-    border-radius: 4px;
+.ingredients p {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 12pt;
 }
+
 
 ul {
     list-style-type: none;
@@ -43,8 +44,7 @@ ul {
 }
 
 @media screen and (min-width: 500px) {
-    .drink-info img{
-        max-width: 40vw;
+    .drink-info img {
+        max-width: 50%;
     }
-  }
-  
+}
