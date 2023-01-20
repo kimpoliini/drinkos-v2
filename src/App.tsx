@@ -11,9 +11,9 @@ const App: FC = () => {
         <header>
           <Link to={'/'}><h1>Drinkos</h1></Link>
           <nav>
+            <Link to={'/'}>Home</Link>
             <Link to={'/latest'}>Latest</Link>
-            <Link to={'/'}>Link two</Link>
-            <Link to={'/'}>Link three</Link>
+            <Link to={'/browse'}>Browse</Link>
 
             <SearchBar />
           </nav>

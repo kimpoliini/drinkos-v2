@@ -12,6 +12,7 @@ import DrinkInfo from './pages/DrinkInfo';
 import Contact from './pages/Contact';
 import Latest from './pages/Latest';
 import Search from './pages/Search';
+import Browse from './pages/Browse';
 
 const router = createHashRouter([
   {
@@ -33,6 +34,10 @@ const router = createHashRouter([
       {
         path: "/search/",
         element: <Search />,
+      },
+      {
+        path: "/browse/",
+        element: <Browse />,
       },
     ]
   }
