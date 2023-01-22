@@ -39,6 +39,10 @@ const router = createHashRouter([
         path: "/browse/",
         element: <Browse />,
       },
+      {
+        path: "/browse/:type/:subtype",
+        element: <Browse />,
+      },
     ]
   }
 ])

@@ -92,6 +92,12 @@ footer>div {
   margin-right: auto;
 }
 
+@media screen and (hover: hover) {
+  html {
+    width: 100vw;
+  }
+}
+
 @media screen and (min-width: 500px) {
   .App {
     margin-left: auto;
