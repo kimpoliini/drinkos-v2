@@ -13,6 +13,7 @@ import Contact from './pages/Contact';
 import Latest from './pages/Latest';
 import Search from './pages/Search';
 import Browse from './pages/Browse';
+import BrowseContent from './pages/BrowseContent';
 
 const router = createHashRouter([
   {
@@ -41,7 +42,7 @@ const router = createHashRouter([
       },
       {
         path: "/browse/:type/:subtype",
-        element: <Browse />,
+        element: <BrowseContent />,
       },
     ]
   }

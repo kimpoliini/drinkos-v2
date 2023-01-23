@@ -67,17 +67,17 @@ const Browse = () => {
 
       <h3>Alcohol</h3>
       <div className='button-row'>
-        {alcoholContent.map((e: string) => <CategoryItem title={e} url={e} color="#c0a8a8"/>)}
+        {alcoholContent.map((e: string, i) => <CategoryItem key={i} title={e} type={"alcohol"} color="#c0a8a8" />)}
       </div>
 
       <h3>Category</h3>
       <div className='button-row'>
-        {categories.map((e: string) => <CategoryItem title={e} url={e} color="#a8c0ba"/>)}
+        {categories.map((e: string, i) => <CategoryItem key={i} title={e} type={"category"} color="#a8c0ba" />)}
       </div>
 
       <h3>Glasses</h3>
       <div className='button-row'>
-        {glasses.map((e: string) => <CategoryItem title={e} url={e} color=""/>)}
+        {glasses.map((e: string, i) => <CategoryItem key={i} title={e} type={"glass"} />)}
 
       </div>
     </div>

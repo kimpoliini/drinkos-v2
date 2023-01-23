@@ -5,7 +5,7 @@ import { apiKey } from '../config/apiKey'
 
 export interface ICategoryItem {
     title: string,
-    url: string,
+    type: string,
     color?: string,
     textColor?: string,
 }
@@ -23,7 +23,7 @@ const CategoryItem: FC<ICategoryItem> = (props) => {
     }
 
     return (
-        <Link to={`/browse/`} style={style}>
+        <Link to={`/browse/${props.type}/${props.title}`} style={style}>
             {props.title}
         </Link>
     )
