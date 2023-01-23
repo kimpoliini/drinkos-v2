@@ -23,7 +23,7 @@ const CategoryItem: FC<ICategoryItem> = (props) => {
     }
 
     return (
-        <Link to={`/browse/${props.type}/${props.title}`} style={style}>
+        <Link to={`/browse/${props.type}/${props.title.replace("/", "%2f")}`} style={style}>
             {props.title}
         </Link>
     )
