@@ -11,7 +11,6 @@ export interface IDrinkGrid {
 }
 
 const DrinkGrid: FC<IDrinkGrid> = (props) => {
-    // const [drinks, setDrinks] = useState<IDrinkListItem[]>([])
     const [hasResults, setHasResults] = useState<boolean>(true)
     const [pages, setPages] = useState<[IDrinkListItem[]]>([[]])
     const [currentPage, setCurrentPage] = useState<number>(0)
@@ -27,10 +26,7 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
 
             if (count > 0) {
                 let pages = Math.floor(count / perPage) + 1
-
                 let newPages: [IDrinkListItem[]] = [[]]
-
-                console.log(count + " total");
 
                 for (let i = 0; i < pages; i++) {
                     if (i + 1 === pages) {
@@ -40,12 +36,8 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                     }
                 }
 
-                console.log(newPages);
-
-                // setDrinks(drinks)
                 setPages(newPages)
             } else {
-                // setDrinks([])
                 setPages([[]])
                 setHasResults(false)
             }
@@ -65,7 +57,7 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                         name={e.name} thumbnail={e.thumbnail} ingredients={e.ingredients} measurements={e.measurements} />
                 }) : (hasResults ? null : <p>No results</p>)}
             </div>
-            <div className='page-indicator'>
+            <div className='page-indicator' style={pages.length > 1 ? {} : { display: "none" }}>
                 <span className={`material-icons ${currentPage === 0 ? "indicator-disabled" : ""}`}
                     onClick={() => decPage()}>
                     keyboard_arrow_left

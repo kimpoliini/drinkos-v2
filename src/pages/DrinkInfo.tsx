@@ -23,6 +23,8 @@ function DrinkInfo() {
     const [drink, setDrink] = useState<IFullDrinkInfo>()
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+
         axios.get(url)
             .then(resp => {
                 console.log(resp.data.drinks[0]);
@@ -56,7 +58,6 @@ function DrinkInfo() {
                 }
 
                 setDrink(drink)
-
             })
     }, [id])
 
@@ -71,7 +72,6 @@ function DrinkInfo() {
             default:
                 return measure.charAt(0).toUpperCase() + measure.slice(1)
         }
-
     }
 
     return (
