@@ -3,10 +3,10 @@ import { IDrinkListItem } from "../components/DrinkListItem"
 
 export const baseUrl = "https://www.thecocktaildb.com/api/json/v2/"
 export const getDrinksFromUrl = async (url: string) => {
-    const promise = new Promise<IDrinkListItem[]>( (resolve, reject) => {
-        resolve( axios.get(url)
+    const promise = new Promise<IDrinkListItem[]>((resolve, reject) => {
+        resolve(axios.get(url)
             .then(resp => {                
-                if(!resp.data.drinks) return []
+                if (!resp.data.drinks || resp.data.drinks === "None Found") return []
                 let drinks: IDrinkListItem[] = resp.data.drinks.map((e: any) => {
 
                     let ingredients: string[] = []

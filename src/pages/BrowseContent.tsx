@@ -8,12 +8,9 @@ const BrowseContent: FC = () => {
 
     let { type, subtype } = useParams()
 
-    const [url, setUrl] = useState<string>(`${baseUrl}${apiKey}/filter.php?`)
-    
-    
-    useEffect(() => {
-        let newUrl = url
-        
+    const getUrl = () => {        
+        let newUrl = `${baseUrl}${apiKey}/filter.php?`
+
         switch (type) {
             case "alcohol":
                 newUrl += "a"
@@ -26,15 +23,12 @@ const BrowseContent: FC = () => {
                 break
         }
 
-        newUrl += "=" + subtype
-        setUrl(newUrl)        
-    }, [subtype])
-
+        return newUrl + "=" + subtype
+    }
 
     return (
         <div>
-            {/* <TextLine text={subtype!} /> */}
-            <DrinkGrid title={subtype!} url={url} />
+            <DrinkGrid title={subtype!} url={getUrl()} />
         </div>
     )
 }

@@ -12,8 +12,6 @@ export interface ICategoryItem {
 
 const CategoryItem: FC<ICategoryItem> = (props) => {
 
-    const url = baseUrl + apiKey + "filter.php?c="
-
     let style = {
         display: "inline-block",
         padding: "0.5rem",

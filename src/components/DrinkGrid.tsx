@@ -62,7 +62,7 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                     keyboard_arrow_left
                 </span>
                 {[...Array(pages.length)].map((e, i) => (
-                    <span className={currentPage === i ? "current-page" : ""}>{i + 1}</span>
+                    <span key={i} className={currentPage === i ? "current-page" : ""}>{i + 1}</span>
                 ))}
                 <span className={`material-icons ${currentPage === pages.length - 1 ? "indicator-disabled" : ""}`}
                     onClick={() => incPage()}>
