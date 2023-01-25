@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { IDrinkListItem } from '../components/DrinkListItem'
+import TagItem from '../components/TagItem'
 import TextLine from '../components/TextLine'
 import { baseUrl } from '../config/api'
 import { apiKey } from '../config/apiKey'
@@ -35,6 +36,8 @@ function DrinkInfo() {
                 let ingredients: string[] = []
                 let measurements: string[] = []
 
+                let tags: string[] = []
+
                 // Turns each individual ingredient and measurements
                 // into an array
                 for (let i = 0; i < 15; i++) {
@@ -48,13 +51,19 @@ function DrinkInfo() {
                     if (measurement) measurements.push(measurement)
                 }
 
+                // Turns all tags into an array
+                if (d.strTags) {
+                    tags = d.strTags.split(",").map((e: string) => e.charAt(0).toUpperCase() + e.slice(1, e.length));
+                }
+
                 drink = {
                     id: d.idDrink,
                     name: d.strDrink,
                     ingredients: ingredients,
                     measurements: measurements,
                     image: d.strDrinkThumb,
-                    instructions: d.strInstructions
+                    instructions: d.strInstructions,
+                    tags: tags,
                 }
 
                 setDrink(drink)
@@ -76,6 +85,11 @@ function DrinkInfo() {
 
     return (
         <div className='drink-info'>
+            
+            <div className='tag-list' style={drink?.tags?.length! > 0 ? {} : {display: "none"}}>
+                {drink?.tags ? drink.tags.map((e: string) => <TagItem title={e} />) : ""}
+            </div>
+            
             <img src={drink?.image} alt={drink?.name} />
             <TextLine text={drink?.name || ""} color="#404653" lineColor="#a8b0c0"
                 style={{ fontWeight: "normal" }} />
@@ -90,6 +104,9 @@ function DrinkInfo() {
                 <h3>Instructions</h3>
                 <p>{drink?.instructions}</p>
             </div>
+
+            
+
         </div>
     )
 }

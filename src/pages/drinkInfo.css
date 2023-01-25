@@ -1,6 +1,6 @@
 .drink-info {
     max-width: 800px;
-    margin-right: auto;
+    margin: 0 auto 0 auto;
 }
 
 .drink-info img {
@@ -38,6 +38,14 @@ ul {
     padding: 0.75rem;
     padding-left: 1rem;
     border-bottom: 1px solid lightgray;
+}
+
+.tag-list {
+    margin: 1rem 0 2rem;
+    display: flex;
+    flex-Wrap: wrap;
+    gap: 0.5rem;
+    justify-Content: center;
 }
 
 @media screen and (min-width: 500px) {
