@@ -1,7 +1,5 @@
 import React from 'react'
 import CategoryItem from '../components/CategoryItem'
-import { baseUrl } from '../config/api'
-import { apiKey } from '../config/apiKey'
 import './browse.css'
 
 const Browse = () => {
@@ -64,6 +62,8 @@ const Browse = () => {
 
   return (
     <div className='browse'>
+      <h2>Browse drinks</h2>
+      <p>Explore drinks based on alcohol contents, category or type of glass.</p>
 
       <h3>Alcohol</h3>
       <div className='button-row'>

@@ -9,7 +9,6 @@ import {
   createHashRouter,
 } from "react-router-dom";
 import DrinkInfo from './pages/DrinkInfo';
-import Contact from './pages/Contact';
 import Latest from './pages/Latest';
 import Search from './pages/Search';
 import Browse from './pages/Browse';

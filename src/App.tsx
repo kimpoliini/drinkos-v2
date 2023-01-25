@@ -3,7 +3,6 @@ import './App.css';
 import { Outlet, Link } from "react-router-dom";
 import SearchBar from './components/SearchBar';
 
-
 const App: FC = () => {
   return (
     <div className='app-wrapper'>
@@ -26,11 +25,10 @@ const App: FC = () => {
 
       <footer>
         <div>
-          <span>Contact</span>
-          <br />
-          <span>About</span>
-          <br />
-          <span>Suggest a change</span>
+          <p>About</p>
+          <p>Contact</p>
+          <p>Suggest a change</p>
+          <p>Results provided by <a href="https://www.thecocktaildb.com/">TheCocktailDB</a></p>
         </div>
       </footer>
     </div>

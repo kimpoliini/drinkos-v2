@@ -34,9 +34,7 @@ input {
     border-radius: 6px;
     left: 0;
     right: 0;
-    margin-top: 0.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin: 0.5rem 1rem 0 1rem;
     overflow: hidden;
     z-index: 1;
 }
@@ -47,14 +45,9 @@ input {
 
 .search-result-item p {
     margin: 0;
-
-    padding-left: 1rem;
     text-align: left;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding: 0.5rem 1rem 0.5rem;
 }
-
-
 
 @media screen and (hover:hover) {
     .search-bar>div:hover {

@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import DrinkGrid from '../components/DrinkGrid';
-import TextLine from '../components/TextLine';
 import { baseUrl } from '../config/api';
 import { apiKey } from '../config/apiKey';
 

@@ -1,12 +1,10 @@
 .drink-info {
     max-width: 800px;
-    margin-left: auto;
     margin-right: auto;
 }
 
 .drink-info img {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 0 auto;
     border-radius: 4px;
     width: 100%;
 }
@@ -21,8 +19,7 @@
 }
 
 .ingredients p {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin-right: 0 1rem 0 1rem;
     font-size: 12pt;
 }
 

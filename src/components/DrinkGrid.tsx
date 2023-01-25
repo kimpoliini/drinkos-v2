@@ -3,7 +3,6 @@ import { getDrinksFromUrl } from '../config/api'
 import DrinkListItem, { IDrinkListItem } from './DrinkListItem'
 import TextLine from './TextLine'
 import './drinkGrid.css'
-import { Link } from 'react-router-dom'
 
 export interface IDrinkGrid {
     title: string,
