@@ -4,7 +4,7 @@ import { ReactImageTint } from 'react-image-tint';
 import { IDrinkListItem } from './DrinkListItem';
 import { baseUrl, getDrinksFromUrl } from '../config/api';
 import { apiKey } from '../config/apiKey';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const SearchBar: FC = () => {
 
@@ -14,6 +14,7 @@ const SearchBar: FC = () => {
   const [query, setQuery] = useState<string>("")
   const elementRefs = useRef<{ app: Element; searchResults: Element }>()
   let { id } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     let app = document.querySelector(".App")
@@ -103,6 +104,14 @@ const SearchBar: FC = () => {
             } else {
               setQuery("")
               setDrinks([])
+            }
+          }}
+
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              navigate(`/search?q=${query}`)
+              setShowResults(false)
+              e.currentTarget.blur()
             }
           }} />
         <div>
