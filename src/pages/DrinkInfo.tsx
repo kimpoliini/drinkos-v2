@@ -7,6 +7,9 @@ import TextLine from '../components/TextLine'
 import { baseUrl } from '../config/api'
 import { apiKey } from '../config/apiKey'
 import './drinkInfo.css'
+import ColorThief from 'colorthief'
+
+const colorThief = new ColorThief()
 
 export interface IFullDrinkInfo extends IDrinkListItem {
     image: string,
@@ -22,9 +25,18 @@ function DrinkInfo() {
     let url = `${baseUrl + apiKey}/lookup.php?i=${id}`
 
     const [drink, setDrink] = useState<IFullDrinkInfo>()
+    const [tagColor, setTagColor] = useState<number[]>([])
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
+
+        // let img = document.querySelector("#drink-image")
+
+        // img!.addEventListener("click", (e) => {
+        //     // console.log(e.currentTarget);
+
+        //     setTagColor(getImageColor(e.currentTarget as Element))
+        // })
 
         axios.get(url)
             .then(resp => {
@@ -70,6 +82,18 @@ function DrinkInfo() {
             })
     }, [id])
 
+    const getImageColor = (img: HTMLImageElement) => {
+        img.setAttribute("crossorigin", "anonymous")
+
+        colorThief.getColor(img, 25).then((color: number[]) => {
+            console.log(color);
+
+        })
+
+        return [1, 2, 3]
+
+    }
+
     const formatMeasure = (measure: string) => {
         measure = measure.toLowerCase()
 
@@ -85,14 +109,13 @@ function DrinkInfo() {
 
     return (
         <div className='drink-info'>
-            
-            <div className='tag-list' style={drink?.tags?.length! > 0 ? {} : {display: "none"}}>
-                {drink?.tags ? drink.tags.map((e: string) => <TagItem title={e} />) : ""}
-            </div>
-            
-            <img src={drink?.image} alt={drink?.name} />
+
             <TextLine text={drink?.name || ""} color="#404653" lineColor="#a8b0c0"
                 style={{ fontWeight: "normal" }} />
+            <img id="drink-image" src={drink?.image} alt={drink?.name} />
+            <div className='tag-list' style={drink?.tags?.length! > 0 ? {} : { display: "none" }}>
+                {drink?.tags ? drink.tags.map((e: string, i) => <TagItem key={i} title={e} />) : ""}
+            </div>
             <div className='ingredients'>
                 <h3>Ingredients</h3>
                 <ul>
@@ -105,7 +128,7 @@ function DrinkInfo() {
                 <p>{drink?.instructions}</p>
             </div>
 
-            
+
 
         </div>
     )

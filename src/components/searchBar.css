@@ -18,6 +18,7 @@ input {
     margin-left: 4px;
     width: 32px;
     height: 32px;
+    filter: invert(75%) sepia(19%) saturate(193%) hue-rotate(182deg) brightness(90%) contrast(95%);
 }
 
 .search-bar>div {
@@ -55,7 +56,7 @@ input {
     }
 
     .search-bar>div:hover img {
-        filter: brightness(10);
+        filter: invert(100%);
     }
 
     .search-result-item>p:hover {

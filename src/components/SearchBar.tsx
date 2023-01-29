@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import './searchBar.css'
-import { ReactImageTint } from 'react-image-tint';
 import { IDrinkListItem } from './DrinkListItem';
 import { baseUrl, getDrinksFromUrl } from '../config/api';
 import { apiKey } from '../config/apiKey';
@@ -116,7 +115,7 @@ const SearchBar: FC = () => {
           }} />
         <div>
           <Link to={`/search?q=${query}`}>
-            <ReactImageTint src={require('../assets/icons/search.png')} color="#a8b0c0" />
+            <img src={require('../assets/icons/search.png')} />
           </Link>
         </div>
       </div>
