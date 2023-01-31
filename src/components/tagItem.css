@@ -1,0 +1,8 @@
+.tag-item {
+    display: "inline-block";
+    border-radius: 6px;
+    color: white;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    font-size: 10pt;
+    transition: background-color 0.5s;
+}
