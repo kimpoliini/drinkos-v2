@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { IDrinkListItem } from '../components/DrinkListItem'
 import TagItem from '../components/TagItem'
@@ -8,8 +8,9 @@ import { baseUrl } from '../config/api'
 import { apiKey } from '../config/apiKey'
 import './drinkInfo.css'
 import ColorThief from 'colorthief'
+import { resolve } from 'path'
+import { rejects } from 'assert'
 
-const colorThief = new ColorThief()
 
 export interface IFullDrinkInfo extends IDrinkListItem {
     image: string,
@@ -20,6 +21,8 @@ export interface IFullDrinkInfo extends IDrinkListItem {
     tags?: string[],
 }
 
+const colorThief = new ColorThief()
+
 function DrinkInfo() {
     let { id } = useParams()
     let url = `${baseUrl + apiKey}/lookup.php?i=${id}`
@@ -29,14 +32,6 @@ function DrinkInfo() {
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
-
-        // let img = document.querySelector("#drink-image")
-
-        // img!.addEventListener("click", (e) => {
-        //     // console.log(e.currentTarget);
-
-        //     setTagColor(getImageColor(e.currentTarget as Element))
-        // })
 
         axios.get(url)
             .then(resp => {
@@ -75,24 +70,13 @@ function DrinkInfo() {
                     measurements: measurements,
                     image: d.strDrinkThumb,
                     instructions: d.strInstructions,
+                    glassType: d.strGlass,
                     tags: tags,
                 }
 
                 setDrink(drink)
             })
     }, [id])
-
-    const getImageColor = (img: HTMLImageElement) => {
-        img.setAttribute("crossorigin", "anonymous")
-
-        colorThief.getColor(img, 25).then((color: number[]) => {
-            console.log(color);
-
-        })
-
-        return [1, 2, 3]
-
-    }
 
     const formatMeasure = (measure: string) => {
         measure = measure.toLowerCase()
@@ -112,9 +96,31 @@ function DrinkInfo() {
 
             <TextLine text={drink?.name || ""} color="#404653" lineColor="#a8b0c0"
                 style={{ fontWeight: "normal" }} />
-            <img id="drink-image" src={drink?.image} alt={drink?.name} />
+            <img id="drink-image" src={drink?.image} alt={drink?.name}
+                onLoad={async (e) => {
+                    let img = (e.target as HTMLImageElement)
+
+                    if (img.complete) {
+                        img.setAttribute("crossOrigin", "")
+
+                        let color = await colorThief.getColor(img)
+
+                        setTagColor(color)
+
+                        // let palette = await colorThief.getPalette(img)
+
+                        // console.log(`%ccolor: ${color}`, `background: rgb(${color.join(",")}); padding: 1rem;`)
+
+                        // palette.forEach((pal: number[], i: number) => {
+                        //     console.log(`%ccolor ${i + 1}: ${pal}`, `background: rgb(${pal.join(",")}); padding: 1rem;`)
+                        // });
+
+                    }
+
+                }} />
             <div className='tag-list' style={drink?.tags?.length! > 0 ? {} : { display: "none" }}>
-                {drink?.tags ? drink.tags.map((e: string, i) => <TagItem key={i} title={e} />) : ""}
+                {drink?.tags ? drink.tags.map((e: string, i) =>
+                    <TagItem key={i} title={e} color={tagColor ? `rgba(${tagColor.join(",")}, 1)` : ""} />) : ""}
             </div>
             <div className='ingredients'>
                 <h3>Ingredients</h3>
@@ -127,9 +133,9 @@ function DrinkInfo() {
                 <h3>Instructions</h3>
                 <p>{drink?.instructions}</p>
             </div>
-
-
-
+            <div className='extra-info'>
+                <TagItem title={drink?.glassType!} icon="wine_bar" big />
+            </div>
         </div>
     )
 }

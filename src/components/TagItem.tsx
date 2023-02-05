@@ -1,25 +1,27 @@
 import React, { FC } from 'react'
+import './tagItem.css'
 
 export interface ITagItem {
     title: string,
     color?: string,
+    big?: boolean,
+    icon?: string,
+    iconColor?: string,
 }
 
-const TagItem:FC<ITagItem> = ({title, color}) => {
+const TagItem: FC<ITagItem> = ({ title, color, big, icon, iconColor }) => {
 
     let style = {
-        display: "inline-block",
         backgroundColor: color ? color : "#404653",
-        borderRadius: "6px",
-        color: "white",
-        padding: "0.25rem 0.5rem 0.25rem 0.5rem",
-        fontSize: "10pt",
-        opacity: "0.5",
-        transition: "background-color 0.5s",
     }
 
     return (
-        <span style={style}>{title}</span>
+        <div style={style} className={`tag-item ${big ? "tag-item-big" : ""}`}>
+            {icon ? <span className="material-icons">{icon}</span> : null}
+            <span>
+                {title}
+            </span>
+        </div>
     )
 }
 
