@@ -10,7 +10,10 @@
 
 .tag-item-big {
     font-size: 11pt;
-    height: min-content;
+    display: flex;
+    gap: 4px;
+    padding: 0.5rem;
+    /* height: min-content; */
     /* display: block; */
     /* width: min-content; */
 }

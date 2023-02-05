@@ -8,13 +8,10 @@ import { baseUrl } from '../config/api'
 import { apiKey } from '../config/apiKey'
 import './drinkInfo.css'
 import ColorThief from 'colorthief'
-import { resolve } from 'path'
-import { rejects } from 'assert'
-
 
 export interface IFullDrinkInfo extends IDrinkListItem {
     image: string,
-    isAlcoholic?: boolean,
+    alcoholic?: string,
     category?: string,
     glassType?: string,
     instructions: string,
@@ -71,6 +68,8 @@ function DrinkInfo() {
                     image: d.strDrinkThumb,
                     instructions: d.strInstructions,
                     glassType: d.strGlass,
+                    category: d.strCategory,
+                    alcoholic: d.strAlcoholic,
                     tags: tags,
                 }
 
@@ -134,7 +133,14 @@ function DrinkInfo() {
                 <p>{drink?.instructions}</p>
             </div>
             <div className='extra-info'>
-                <TagItem title={drink?.glassType!} icon="wine_bar" big />
+                <TagItem title={drink?.glassType!} icon="wine_bar" big color={"#a8b0c0"} />
+                <TagItem title={drink?.category!} icon="category" big color={"#a8b0c0"} />
+                <TagItem title={drink?.alcoholic!}
+                    icon={drink?.alcoholic == "Alcoholic"
+                        ? "liquor" : (drink?.alcoholic == "Non alcoholic"
+                            ? "no_drinks" : "local_bar")}
+                    big
+                    color={"#a8b0c0"} />
             </div>
         </div>
     )
