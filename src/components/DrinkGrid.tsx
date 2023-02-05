@@ -24,11 +24,16 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
             let count = drinks.length
 
             if (count > 0) {
-                let pages = Math.floor(count / perPage) + 1
+                let pages = Math.floor((count / perPage) == 1 ? 0 : (count / perPage)) + 1
                 let newPages: [IDrinkListItem[]] = [[]]
 
-                for (let i = 0; i < pages; i++) {
+                for (let i = 0; i < pages; i++) {                    
                     if (i + 1 === pages) {
+                        if(drinks.length === perPage){
+                            newPages[i] = drinks
+                            break
+                        }
+
                         newPages[i] = drinks.slice(i * perPage, i * perPage + (count % perPage))
                     } else {
                         newPages[i] = drinks.slice(i * perPage, (i + 1) * perPage)
