@@ -1,0 +1,7 @@
+.category-item {
+    display: inline-block;
+    padding: 0.5rem;
+    border-radius: 12px;
+    font-size: 14pt;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
