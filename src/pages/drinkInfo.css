@@ -47,6 +47,11 @@ ul {
     justify-Content: center;
 }
 
+.extra-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 @media screen and (min-width: 500px) {
     .drink-info img {
         max-width: 50%;

@@ -6,3 +6,11 @@
     font-size: 10pt;
     transition: background-color 0.5s;
 }
+
+
+.tag-item-big {
+    font-size: 11pt;
+    height: min-content;
+    /* display: block; */
+    /* width: min-content; */
+}

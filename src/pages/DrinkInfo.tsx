@@ -29,7 +29,6 @@ function DrinkInfo() {
 
     const [drink, setDrink] = useState<IFullDrinkInfo>()
     const [tagColor, setTagColor] = useState<number[]>([])
-    const imgRef = useRef<HTMLImageElement>();
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -71,6 +70,7 @@ function DrinkInfo() {
                     measurements: measurements,
                     image: d.strDrinkThumb,
                     instructions: d.strInstructions,
+                    glassType: d.strGlass,
                     tags: tags,
                 }
 
@@ -133,9 +133,9 @@ function DrinkInfo() {
                 <h3>Instructions</h3>
                 <p>{drink?.instructions}</p>
             </div>
-
-
-
+            <div className='extra-info'>
+                <TagItem title={drink?.glassType!} icon="wine_bar" big />
+            </div>
         </div>
     )
 }
