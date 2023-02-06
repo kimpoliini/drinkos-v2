@@ -8,6 +8,7 @@ import { baseUrl } from '../config/api'
 import { apiKey } from '../config/apiKey'
 import './drinkInfo.css'
 import ColorThief from 'colorthief'
+import { useQuery } from 'react-query'
 
 export interface IFullDrinkInfo extends IDrinkListItem {
     image: string,
@@ -21,61 +22,69 @@ export interface IFullDrinkInfo extends IDrinkListItem {
 const colorThief = new ColorThief()
 
 function DrinkInfo() {
-    let { id } = useParams()
-    let url = `${baseUrl + apiKey}/lookup.php?i=${id}`
-
     const [drink, setDrink] = useState<IFullDrinkInfo>()
     const [tagColor, setTagColor] = useState<number[]>([])
+
+    let { id } = useParams()
+    let url = `${baseUrl + apiKey}/lookup.php?i=${id}`
+    let { data } = useQuery("drink-info", () => {
+        return fetch(url).then(resp => resp.json())
+    })
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
 
-        axios.get(url)
-            .then(resp => {
-                console.log(resp.data.drinks[0]);
+        // axios.get(url)
+        //     .then(resp => {
+        if (data) {
+            console.log(data.drinks[0]);
 
-                let d = resp.data.drinks[0]
-                let drink: IFullDrinkInfo
+            let d = data.drinks[0]
+            let drink: IFullDrinkInfo
 
-                let ingredients: string[] = []
-                let measurements: string[] = []
+            let ingredients: string[] = []
+            let measurements: string[] = []
 
-                let tags: string[] = []
+            let tags: string[] = []
 
-                // Turns each individual ingredient and measurements
-                // into an array
-                for (let i = 0; i < 15; i++) {
-                    let ingredient = d[`strIngredient${i + 1}`]
-                    let measurement = d[`strMeasure${i + 1}`]
+            // Turns each individual ingredient and measurements
+            // into an array
+            for (let i = 0; i < 15; i++) {
+                let ingredient = d[`strIngredient${i + 1}`]
+                let measurement = d[`strMeasure${i + 1}`]
 
-                    if (!ingredient && !measurement) break
+                if (!ingredient && !measurement) break
 
-                    if (ingredient) ingredients.push(ingredient)
+                if (ingredient) ingredients.push(ingredient)
 
-                    if (measurement) measurements.push(measurement)
-                }
+                if (measurement) measurements.push(measurement)
+            }
 
-                // Turns all tags into an array
-                if (d.strTags) {
-                    tags = d.strTags.split(",").map((e: string) => e.charAt(0).toUpperCase() + e.slice(1, e.length));
-                }
+            // Turns all tags into an array
+            if (d.strTags) {
+                tags = d.strTags.split(",").map((e: string) => e.charAt(0).toUpperCase() + e.slice(1, e.length));
+            }
 
-                drink = {
-                    id: d.idDrink,
-                    name: d.strDrink,
-                    ingredients: ingredients,
-                    measurements: measurements,
-                    image: d.strDrinkThumb,
-                    instructions: d.strInstructions,
-                    glassType: d.strGlass,
-                    category: d.strCategory,
-                    alcoholic: d.strAlcoholic,
-                    tags: tags,
-                }
+            drink = {
+                id: d.idDrink,
+                name: d.strDrink,
+                ingredients: ingredients,
+                measurements: measurements,
+                image: d.strDrinkThumb,
+                instructions: d.strInstructions,
+                glassType: d.strGlass,
+                category: d.strCategory,
+                alcoholic: d.strAlcoholic,
+                tags: tags,
+            }
 
-                setDrink(drink)
-            })
-    }, [id])
+            setDrink(drink)
+
+
+        }
+
+
+    }, [data])
 
     const formatMeasure = (measure: string) => {
         measure = measure.toLowerCase()

@@ -13,6 +13,10 @@ import Latest from './pages/Latest';
 import Search from './pages/Search';
 import Browse from './pages/Browse';
 import BrowseContent from './pages/BrowseContent';
+import { QueryClientProvider } from 'react-query';
+import { QueryClient } from 'react-query';
+
+const client = new QueryClient()
 
 const router = createHashRouter([
   {
@@ -52,7 +56,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   // <React.StrictMode>
-  <RouterProvider router={router} />
+  <QueryClientProvider client={client}>
+    <RouterProvider router={router} />
+  </QueryClientProvider>
   // </React.StrictMode>
 );
 

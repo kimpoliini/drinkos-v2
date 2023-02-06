@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from 'react'
-import { getDrinksFromUrl } from '../config/api'
+import { getDrinkListFromApiResults, getDrinksFromUrl } from '../config/api'
 import DrinkListItem, { IDrinkListItem } from './DrinkListItem'
 import TextLine from './TextLine'
 import './drinkGrid.css'
+import { useQuery } from 'react-query'
 
 export interface IDrinkGrid {
     title: string,
@@ -14,12 +15,46 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     const [pages, setPages] = useState<[IDrinkListItem[]]>([[]])
     const [currentPage, setCurrentPage] = useState<number>(0)
 
+    const { data, isLoading } = useQuery("data", () => {
+        // return getDrinksFromUrl(props.url).then(drinks => {
+        //     let perPage = 25
+        //     let count = drinks.length
+
+        //     console.log("fetch")
+
+        //     if (count > 0) {
+        //         let pages = Math.floor((count / perPage) == 1 ? 0 : (count / perPage)) + 1
+        //         let newPages: [IDrinkListItem[]] = [[]]
+
+        //         for (let i = 0; i < pages; i++) {
+        //             if (i + 1 === pages) {
+        //                 if (drinks.length === perPage) {
+        //                     newPages[i] = drinks
+        //                     break
+        //                 }
+
+        //                 newPages[i] = drinks.slice(i * perPage, i * perPage + (count % perPage))
+        //             } else {
+        //                 newPages[i] = drinks.slice(i * perPage, (i + 1) * perPage)
+        //             }
+        //         }
+
+        //         setPages(newPages)
+        //     } else {
+        //         setPages([[]])
+        //         setHasResults(false)
+        //     }
+        // })
+        return fetch(props.url).then(resp => resp.json())
+    })
+
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        if(pages.length > 1) window.scrollTo({ top: 0, behavior: 'smooth' })
     }, [currentPage])
 
     useEffect(() => {
-        getDrinksFromUrl(props.url).then(drinks => {
+        if (data) {
+            let drinks = getDrinkListFromApiResults(data.drinks)
             let perPage = 25
             let count = drinks.length
 
@@ -27,9 +62,9 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                 let pages = Math.floor((count / perPage) == 1 ? 0 : (count / perPage)) + 1
                 let newPages: [IDrinkListItem[]] = [[]]
 
-                for (let i = 0; i < pages; i++) {                    
+                for (let i = 0; i < pages; i++) {
                     if (i + 1 === pages) {
-                        if(drinks.length === perPage){
+                        if (drinks.length === perPage) {
                             newPages[i] = drinks
                             break
                         }
@@ -45,8 +80,42 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                 setPages([[]])
                 setHasResults(false)
             }
-        })
-    }, [props.url])
+
+
+        }
+    }, [data])
+
+    // useEffect(() => {
+    //     getDrinksFromUrl(props.url).then(drinks => {
+    //         let perPage = 25
+    //         let count = drinks.length
+
+    //         console.log("fetch")
+
+    //         if (count > 0) {
+    //             let pages = Math.floor((count / perPage) == 1 ? 0 : (count / perPage)) + 1
+    //             let newPages: [IDrinkListItem[]] = [[]]
+
+    //             for (let i = 0; i < pages; i++) {                    
+    //                 if (i + 1 === pages) {
+    //                     if(drinks.length === perPage){
+    //                         newPages[i] = drinks
+    //                         break
+    //                     }
+
+    //                     newPages[i] = drinks.slice(i * perPage, i * perPage + (count % perPage))
+    //                 } else {
+    //                     newPages[i] = drinks.slice(i * perPage, (i + 1) * perPage)
+    //                 }
+    //             }
+
+    //             setPages(newPages)
+    //         } else {
+    //             setPages([[]])
+    //             setHasResults(false)
+    //         }
+    //     })
+    // }, [props.url])
 
     const decPage = () => { if (currentPage > 0) setCurrentPage(currentPage - 1) }
     const incPage = () => { if (currentPage < pages.length - 1) setCurrentPage(currentPage + 1) }
