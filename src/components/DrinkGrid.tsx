@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useContext, useEffect, useState } from 'react'
 import { getDrinkListFromApiResults, getDrinksFromUrl } from '../config/api'
 import DrinkListItem, { IDrinkListItem } from './DrinkListItem'
 import TextLine from './TextLine'
 import './drinkGrid.css'
 import { useQuery } from 'react-query'
 import { useLocation, useParams } from 'react-router-dom'
+import { ScrollContext } from '../config/ScrollContext'
 
 export interface IDrinkGrid {
     title: string,
@@ -16,6 +17,13 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     const [pages, setPages] = useState<[IDrinkListItem[]]>([[]])
     const [currentPage, setCurrentPage] = useState<number>(0)
     const location = useLocation()
+    let scroll = useContext(ScrollContext)
+
+
+    // window.addEventListener("scroll", (e) => {
+    //     scroll.value = window.scrollY
+    //     // console.log(window.scrollY)
+    // })
 
     const { data, isLoading } = useQuery("data" + props.url, () => {
         return fetch(props.url).then(resp => resp.json())
@@ -28,6 +36,14 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     useEffect(() => {
         setPages([[]])
     }, [location])
+
+    useEffect(() => {
+        if (!isLoading) {
+            // setTimeout(() => {
+                window.scrollTo({ top: scroll.value })
+            // }, 20)
+        }
+    }, [isLoading])
 
     useEffect(() => {
         if (data) {
@@ -53,6 +69,8 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                 }
 
                 setPages(newPages)
+                window.scrollTo({ top: scroll.value })
+
             } else {
                 setPages([[]])
                 setHasResults(false)
@@ -61,38 +79,6 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
 
         }
     }, [data])
-
-    // useEffect(() => {
-    //     getDrinksFromUrl(props.url).then(drinks => {
-    //         let perPage = 25
-    //         let count = drinks.length
-
-    //         console.log("fetch")
-
-    //         if (count > 0) {
-    //             let pages = Math.floor((count / perPage) == 1 ? 0 : (count / perPage)) + 1
-    //             let newPages: [IDrinkListItem[]] = [[]]
-
-    //             for (let i = 0; i < pages; i++) {                    
-    //                 if (i + 1 === pages) {
-    //                     if(drinks.length === perPage){
-    //                         newPages[i] = drinks
-    //                         break
-    //                     }
-
-    //                     newPages[i] = drinks.slice(i * perPage, i * perPage + (count % perPage))
-    //                 } else {
-    //                     newPages[i] = drinks.slice(i * perPage, (i + 1) * perPage)
-    //                 }
-    //             }
-
-    //             setPages(newPages)
-    //         } else {
-    //             setPages([[]])
-    //             setHasResults(false)
-    //         }
-    //     })
-    // }, [props.url])
 
     const decPage = () => { if (currentPage > 0) setCurrentPage(currentPage - 1) }
     const incPage = () => { if (currentPage < pages.length - 1) setCurrentPage(currentPage + 1) }
@@ -104,7 +90,12 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
             <div className='drink-grid'>
                 {pages[currentPage].length > 0 ? pages[currentPage].map((e: IDrinkListItem) => {
                     return <DrinkListItem key={e.id} id={e.id}
-                        name={e.name} thumbnail={e.thumbnail} ingredients={e.ingredients} measurements={e.measurements} />
+                        name={e.name} thumbnail={e.thumbnail}
+                        ingredients={e.ingredients}
+                        measurements={e.measurements}
+                        callback={() => {
+                            scroll.setValue(window.scrollY)
+                        }} />
                 }) : (hasResults ? null : <p>No results</p>)}
             </div>
             <div className='page-indicator' style={pages.length > 1 ? {} : { display: "none" }}>

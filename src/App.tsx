@@ -1,9 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import './App.css';
 import { Outlet, Link } from "react-router-dom";
 import SearchBar from './components/SearchBar';
+import { ScrollContext } from './config/ScrollContext';
 
 const App: FC = () => {
+  const [value, setValue] = useState<number>(0)
+
   return (
     <div className='app-wrapper'>
       <div className="App">
@@ -19,7 +22,9 @@ const App: FC = () => {
         </header>
 
         <main>
-          <Outlet />
+          <ScrollContext.Provider value={{ value, setValue }}>
+            <Outlet />
+          </ScrollContext.Provider>
         </main>
       </div>
 
