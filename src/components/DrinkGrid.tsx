@@ -4,6 +4,7 @@ import DrinkListItem, { IDrinkListItem } from './DrinkListItem'
 import TextLine from './TextLine'
 import './drinkGrid.css'
 import { useQuery } from 'react-query'
+import { useLocation, useParams } from 'react-router-dom'
 
 export interface IDrinkGrid {
     title: string,
@@ -14,43 +15,19 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     const [hasResults, setHasResults] = useState<boolean>(true)
     const [pages, setPages] = useState<[IDrinkListItem[]]>([[]])
     const [currentPage, setCurrentPage] = useState<number>(0)
+    const location = useLocation()
 
-    const { data, isLoading } = useQuery("data", () => {
-        // return getDrinksFromUrl(props.url).then(drinks => {
-        //     let perPage = 25
-        //     let count = drinks.length
-
-        //     console.log("fetch")
-
-        //     if (count > 0) {
-        //         let pages = Math.floor((count / perPage) == 1 ? 0 : (count / perPage)) + 1
-        //         let newPages: [IDrinkListItem[]] = [[]]
-
-        //         for (let i = 0; i < pages; i++) {
-        //             if (i + 1 === pages) {
-        //                 if (drinks.length === perPage) {
-        //                     newPages[i] = drinks
-        //                     break
-        //                 }
-
-        //                 newPages[i] = drinks.slice(i * perPage, i * perPage + (count % perPage))
-        //             } else {
-        //                 newPages[i] = drinks.slice(i * perPage, (i + 1) * perPage)
-        //             }
-        //         }
-
-        //         setPages(newPages)
-        //     } else {
-        //         setPages([[]])
-        //         setHasResults(false)
-        //     }
-        // })
+    const { data, isLoading } = useQuery("data" + props.url, () => {
         return fetch(props.url).then(resp => resp.json())
     })
 
     useEffect(() => {
-        if(pages.length > 1) window.scrollTo({ top: 0, behavior: 'smooth' })
+        if (pages.length > 1) window.scrollTo({ top: 0, behavior: 'smooth' })
     }, [currentPage])
+
+    useEffect(() => {
+        setPages([[]])
+    }, [location])
 
     useEffect(() => {
         if (data) {

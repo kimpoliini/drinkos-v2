@@ -24,18 +24,20 @@ const colorThief = new ColorThief()
 function DrinkInfo() {
     const [drink, setDrink] = useState<IFullDrinkInfo>()
     const [tagColor, setTagColor] = useState<number[]>([])
-
     let { id } = useParams()
     let url = `${baseUrl + apiKey}/lookup.php?i=${id}`
-    let { data } = useQuery("drink-info", () => {
+
+    let { data, isLoading } = useQuery("drink-info-" + id, () => {
         return fetch(url).then(resp => resp.json())
     })
 
     useEffect(() => {
+        if (isLoading) setDrink(undefined)
+    }, [isLoading])
+
+    useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
 
-        // axios.get(url)
-        //     .then(resp => {
         if (data) {
             console.log(data.drinks[0]);
 
@@ -77,13 +79,8 @@ function DrinkInfo() {
                 alcoholic: d.strAlcoholic,
                 tags: tags,
             }
-
             setDrink(drink)
-
-
         }
-
-
     }, [data])
 
     const formatMeasure = (measure: string) => {
