@@ -1,10 +1,10 @@
-import React, { FC, useContext, useEffect, useState } from 'react'
+import React, { FC, useContext, useEffect, useRef, useState } from 'react'
 import { getDrinkListFromApiResults, getDrinksFromUrl } from '../config/api'
 import DrinkListItem, { IDrinkListItem } from './DrinkListItem'
 import TextLine from './TextLine'
 import './drinkGrid.css'
 import { useQuery } from 'react-query'
-import { useLocation, useParams } from 'react-router-dom'
+import { Location, useLocation, useNavigate, useNavigationType,  } from 'react-router-dom'
 import { ScrollContext } from '../config/ScrollContext'
 
 export interface IDrinkGrid {
@@ -16,34 +16,35 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     const [hasResults, setHasResults] = useState<boolean>(true)
     const [pages, setPages] = useState<[IDrinkListItem[]]>([[]])
     const [currentPage, setCurrentPage] = useState<number>(0)
+
+    const navigationType = useNavigationType()
     const location = useLocation()
+    const prevLocation = useRef<Location>()
     let scroll = useContext(ScrollContext)
-
-
-    // window.addEventListener("scroll", (e) => {
-    //     scroll.value = window.scrollY
-    //     // console.log(window.scrollY)
-    // })
 
     const { data, isLoading } = useQuery("data" + props.url, () => {
         return fetch(props.url).then(resp => resp.json())
     })
 
+    useEffect(()=>{
+        if(pages[0].length > 0 && navigationType === "POP") {            
+            window.scrollTo({ top: scroll.value })
+            scroll.setValue(0)
+        }
+    },[pages])
+
     useEffect(() => {
-        if (pages.length > 1) window.scrollTo({ top: 0, behavior: 'smooth' })
+        if (pages[0].length > 1) {            
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            scroll.setValue(0)
+        }
     }, [currentPage])
 
     useEffect(() => {
-        setPages([[]])
-    }, [location])
+        if(prevLocation.current?.pathname !== location.pathname) setPages([[]])
 
-    useEffect(() => {
-        if (!isLoading) {
-            // setTimeout(() => {
-                window.scrollTo({ top: scroll.value })
-            // }, 20)
-        }
-    }, [isLoading])
+        prevLocation.current = location
+    }, [location])
 
     useEffect(() => {
         if (data) {
@@ -69,14 +70,10 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                 }
 
                 setPages(newPages)
-                window.scrollTo({ top: scroll.value })
-
             } else {
                 setPages([[]])
                 setHasResults(false)
             }
-
-
         }
     }, [data])
 

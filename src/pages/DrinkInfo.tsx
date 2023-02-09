@@ -1,5 +1,4 @@
-import axios from 'axios'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { IDrinkListItem } from '../components/DrinkListItem'
 import TagItem from '../components/TagItem'
@@ -142,8 +141,8 @@ function DrinkInfo() {
                 <TagItem title={drink?.glassType!} icon="wine_bar" big color={"#a8b0c0"} />
                 <TagItem title={drink?.category!} icon="category" big color={"#a8b0c0"} />
                 <TagItem title={drink?.alcoholic!}
-                    icon={drink?.alcoholic == "Alcoholic"
-                        ? "liquor" : (drink?.alcoholic == "Non alcoholic"
+                    icon={drink?.alcoholic === "Alcoholic"
+                        ? "liquor" : (drink?.alcoholic === "Non alcoholic"
                             ? "no_drinks" : "local_bar")}
                     big
                     color={"#a8b0c0"} />
