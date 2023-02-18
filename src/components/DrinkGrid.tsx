@@ -1,10 +1,10 @@
 import React, { FC, useContext, useEffect, useRef, useState } from 'react'
-import { getDrinkListFromApiResults, getDrinksFromUrl } from '../config/api'
+import { getDrinkListFromApiResults } from '../config/api'
 import DrinkListItem, { IDrinkListItem } from './DrinkListItem'
 import TextLine from './TextLine'
 import './drinkGrid.css'
 import { useQuery } from 'react-query'
-import { Location, useLocation, useNavigate, useNavigationType,  } from 'react-router-dom'
+import { Location, useLocation, useNavigate, useNavigationType, } from 'react-router-dom'
 import { ScrollContext } from '../config/ScrollContext'
 
 export interface IDrinkGrid {
@@ -22,26 +22,31 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     const prevLocation = useRef<Location>()
     let scroll = useContext(ScrollContext)
 
-    const { data, isLoading } = useQuery("data" + props.url, () => {
-        return fetch(props.url).then(resp => resp.json())
+    const { data, isLoading } = useQuery("data" + props.url, async () => {
+        const resp = await fetch(props.url)
+        return await resp.json()
     })
 
-    useEffect(()=>{
-        if(pages[0].length > 0 && navigationType === "POP") {            
+    useEffect(() => {
+        console.log("pages");
+
+        if (pages[0].length > 0 && navigationType === "POP" && scroll.value > 0) {
             window.scrollTo({ top: scroll.value })
+            console.log("scrolled to " + scroll.value);
+
             scroll.setValue(0)
         }
-    },[pages])
+    }, [pages])
 
     useEffect(() => {
-        if (pages[0].length > 1) {            
+        if (pages[0].length > 1) {
             window.scrollTo({ top: 0, behavior: 'smooth' })
             scroll.setValue(0)
         }
     }, [currentPage])
 
     useEffect(() => {
-        if(prevLocation.current?.pathname !== location.pathname) setPages([[]])
+        if (prevLocation.current?.pathname !== location.pathname) setPages([[]])
 
         prevLocation.current = location
     }, [location])
@@ -83,16 +88,15 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     return (
         <div>
             <TextLine text={props.title} style={{ fontWeight: "normal" }} color="#404653" lineColor="#a8b0c0" />
-
             <div className='drink-grid'>
-                {pages[currentPage].length > 0 ? pages[currentPage].map((e: IDrinkListItem) => {
+                {pages[currentPage].length > 0 ? pages[currentPage].map((e: IDrinkListItem, i) => {
+                    console.log(i);
+
                     return <DrinkListItem key={e.id} id={e.id}
                         name={e.name} thumbnail={e.thumbnail}
                         ingredients={e.ingredients}
                         measurements={e.measurements}
-                        callback={() => {
-                            scroll.setValue(window.scrollY)
-                        }} />
+                        callback={() => { scroll.setValue(window.scrollY) }} />
                 }) : (hasResults ? null : <p>No results</p>)}
             </div>
             <div className='page-indicator' style={pages.length > 1 ? {} : { display: "none" }}>

@@ -23,20 +23,24 @@ const colorThief = new ColorThief()
 function DrinkInfo() {
     const [drink, setDrink] = useState<IFullDrinkInfo>()
     const [tagColor, setTagColor] = useState<number[]>([])
+    const [imageLoaded, setImageLoaded] = useState<boolean>(false)
     let { id } = useParams()
     let url = `${baseUrl + apiKey}/lookup.php?i=${id}`
 
-    let { data, isLoading } = useQuery("drink-info-" + id, () => {
-        return fetch(url).then(resp => resp.json())
+    let { data, isLoading } = useQuery("drink-info-" + id, async () => {
+        const resp = await fetch(url)
+        return await resp.json()
     })
 
     useEffect(() => {
-        if (isLoading) setDrink(undefined)
+        if (isLoading) {
+            setDrink(undefined)
+            setImageLoaded(false)
+        } else window.scrollTo({ top: 0, behavior: 'smooth' })
+
     }, [isLoading])
 
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-
         if (data) {
             console.log(data.drinks[0]);
 
@@ -100,8 +104,12 @@ function DrinkInfo() {
 
             <TextLine text={drink?.name || ""} color="#404653" lineColor="#a8b0c0"
                 style={{ fontWeight: "normal" }} />
-            <img id="drink-image" src={drink?.image} alt={drink?.name}
+            <img id="drink-image"
+                src={drink?.image} alt={drink?.name}
+                className={imageLoaded ? "" : "image-loading"}
                 onLoad={async (e) => {
+                    setImageLoaded(true)
+
                     let img = (e.target as HTMLImageElement)
 
                     if (img.complete) {
@@ -110,15 +118,6 @@ function DrinkInfo() {
                         let color = await colorThief.getColor(img)
 
                         setTagColor(color)
-
-                        // let palette = await colorThief.getPalette(img)
-
-                        // console.log(`%ccolor: ${color}`, `background: rgb(${color.join(",")}); padding: 1rem;`)
-
-                        // palette.forEach((pal: number[], i: number) => {
-                        //     console.log(`%ccolor ${i + 1}: ${pal}`, `background: rgb(${pal.join(",")}); padding: 1rem;`)
-                        // });
-
                     }
 
                 }} />
