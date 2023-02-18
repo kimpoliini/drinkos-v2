@@ -15,9 +15,8 @@ const Search: FC = () => {
 
     return (
         <div>
-            <DrinkGrid title={`Search results for ${query}`} url={`${baseUrl + apiKey}/search.php?s=${query}`}/>
-            
-            </div>
+            <DrinkGrid title={`Search results for ${query}`} url={`${baseUrl + apiKey}/search.php?s=${query}`} />
+        </div>
     )
 }
 

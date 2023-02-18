@@ -108,18 +108,13 @@ function DrinkInfo() {
                 src={drink?.image} alt={drink?.name}
                 className={imageLoaded ? "" : "image-loading"}
                 onLoad={async (e) => {
-                    setImageLoaded(true)
-
                     let img = (e.target as HTMLImageElement)
+                    img.setAttribute("crossOrigin", "")
 
                     if (img.complete) {
-                        img.setAttribute("crossOrigin", "")
-
-                        let color = await colorThief.getColor(img)
-
-                        setTagColor(color)
+                        setImageLoaded(true)
+                        setTagColor(await colorThief.getColor(img))
                     }
-
                 }} />
             <div className='tag-list' style={drink?.tags?.length! > 0 ? {} : { display: "none" }}>
                 {drink?.tags ? drink.tags.map((e: string, i) =>
@@ -136,7 +131,7 @@ function DrinkInfo() {
                 <h3>Instructions</h3>
                 <p>{drink?.instructions}</p>
             </div>
-            <div className='extra-info'>
+            {!isLoading ? <div className='extra-info'>
                 <TagItem title={drink?.glassType!} icon="wine_bar" big color={"#a8b0c0"} />
                 <TagItem title={drink?.category!} icon="category" big color={"#a8b0c0"} />
                 <TagItem title={drink?.alcoholic!}
@@ -145,7 +140,7 @@ function DrinkInfo() {
                             ? "no_drinks" : "local_bar")}
                     big
                     color={"#a8b0c0"} />
-            </div>
+            </div> : null}
         </div>
     )
 }

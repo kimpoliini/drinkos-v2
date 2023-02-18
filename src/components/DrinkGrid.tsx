@@ -28,12 +28,8 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     })
 
     useEffect(() => {
-        console.log("pages");
-
         if (pages[0].length > 0 && navigationType === "POP" && scroll.value > 0) {
             window.scrollTo({ top: scroll.value })
-            console.log("scrolled to " + scroll.value);
-
             scroll.setValue(0)
         }
     }, [pages])
@@ -90,8 +86,6 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
             <TextLine text={props.title} style={{ fontWeight: "normal" }} color="#404653" lineColor="#a8b0c0" />
             <div className='drink-grid'>
                 {pages[currentPage].length > 0 ? pages[currentPage].map((e: IDrinkListItem, i) => {
-                    console.log(i);
-
                     return <DrinkListItem key={e.id} id={e.id}
                         name={e.name} thumbnail={e.thumbnail}
                         ingredients={e.ingredients}
