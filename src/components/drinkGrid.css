@@ -1,8 +1,8 @@
 .drink-grid {
   display: grid;
   /* grid-template-columns: repeat(1, 1fr); */
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
   padding-top: 1rem;
   margin: 0 auto 0 auto;
   justify-items: center;
@@ -50,6 +50,6 @@
 
 @media screen and (min-width: 400px) {
   .drink-grid {
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 }
