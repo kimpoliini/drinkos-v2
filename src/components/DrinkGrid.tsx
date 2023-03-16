@@ -4,7 +4,7 @@ import DrinkListItem, { IDrinkListItem } from './DrinkListItem'
 import TextLine from './TextLine'
 import './drinkGrid.css'
 import { useQuery } from 'react-query'
-import { Location, useLocation, useNavigate, useNavigationType, } from 'react-router-dom'
+import { Location, useLocation, useNavigate, useNavigationType, useParams, useSearchParams, } from 'react-router-dom'
 import { ScrollContext } from '../config/ScrollContext'
 
 export interface IDrinkGrid {
@@ -16,6 +16,7 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     const [hasResults, setHasResults] = useState<boolean>(true)
     const [pages, setPages] = useState<[IDrinkListItem[]]>([[]])
     const [currentPage, setCurrentPage] = useState<number>(0)
+    const [searchParams] = useSearchParams()
 
     const navigationType = useNavigationType()
     const location = useLocation()
@@ -27,6 +28,7 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
         return await resp.json()
     })
 
+    // Restore scroll if navigating back
     useEffect(() => {
         if (pages[0].length > 0 && navigationType === "POP" && scroll.value > 0) {
             window.scrollTo({ top: scroll.value })
@@ -35,19 +37,14 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     }, [pages])
 
     useEffect(() => {
-        if (pages[0].length > 1) {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            scroll.setValue(0)
-        }
-    }, [currentPage])
-
-    useEffect(() => {
         if (prevLocation.current?.pathname !== location.pathname) setPages([[]])
 
         prevLocation.current = location
     }, [location])
 
     useEffect(() => {
+        console.log(location);
+
         if (data) {
             let drinks = getDrinkListFromApiResults(data.drinks)
             let perPage = 25
@@ -75,11 +72,47 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                 setPages([[]])
                 setHasResults(false)
             }
+
+            // Check after loading the data if there is a valid page number 
+            // parameter in the URL and sets the current page to that
+            const pageFromUrl = parseInt(searchParams.get("p") || "") - 1 || 0
+            if (pageFromUrl) setCurrentPage(pageFromUrl)
         }
+
     }, [data])
 
-    const decPage = () => { if (currentPage > 0) setCurrentPage(currentPage - 1) }
-    const incPage = () => { if (currentPage < pages.length - 1) setCurrentPage(currentPage + 1) }
+    function scrollToTop() {
+        if (pages[0].length > 1) {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            scroll.setValue(0)
+        }
+    }
+
+    function replaceUrl(pageNumber: number) {
+        let url = location.pathname
+        let char = '?'
+
+        console.log(location);
+        if (location.search) {
+            url += location.search
+            char = "&"
+        }
+
+
+
+        window.history.pushState({}, "", `#${url}${char}p=${pageNumber}`)
+        scrollToTop()
+
+    }
+
+    const decPage = () => {
+        if (currentPage > 0) setCurrentPage(currentPage - 1)
+        replaceUrl(currentPage)
+    }
+    const incPage = () => {
+        if (currentPage < pages.length - 1) setCurrentPage(currentPage + 1)
+        replaceUrl(currentPage + 2)
+    }
 
     return (
         <div>
