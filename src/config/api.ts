@@ -41,8 +41,6 @@ export const getDrinksFromUrl = async (url: string) => {
 
 export const getDrinkListFromApiResults = (data: []) => {
     let drinks: IDrinkListItem[] = data.map((e: any) => {
-
-    // console.log(e);
     
         let ingredients: string[] = []
         let measurements: string[] = []

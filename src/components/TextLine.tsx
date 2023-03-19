@@ -11,15 +11,11 @@ export interface ITextLine {
 const TextLine: FC<ITextLine> = (props) => {
     const textLineStyle = {
         ...props.style,
-        color: (props.color ? props.color : "black"),
+        color: props.color || "black",
     }
 
     const customLine = "1px solid" +
-        (props.color
-            ? (props.lineColor
-                ? props.lineColor
-                : props.color)
-            : "black")
+        (props.color ? (props.lineColor || props.color): "black")
 
     useEffect(() => {
         let span: HTMLElement = document.querySelector(".text-line > span")!

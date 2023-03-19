@@ -12,7 +12,7 @@ export interface ITagItem {
 const TagItem: FC<ITagItem> = ({ title, color, big, icon, iconColor }) => {
 
     let style = {
-        backgroundColor: color ? color : "#404653",
+        backgroundColor: color || "#404653",
     }
 
     return (

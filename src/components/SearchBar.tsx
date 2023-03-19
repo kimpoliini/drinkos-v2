@@ -32,17 +32,18 @@ const SearchBar: FC = () => {
 
   const updateResultsPosition = () => {
     let width = window.innerWidth
+    let appRef = elementRefs.current!.app
 
-    let left = window.getComputedStyle(elementRefs.current!.app).marginLeft
-    let right = window.getComputedStyle(elementRefs.current!.app).marginRight
+    let left = window.getComputedStyle(appRef).marginLeft
+    let right = parseFloat(window.getComputedStyle(appRef).marginRight) - 16
 
     if (width >= 768) { //Tablet and bigger
       elementRefs.current!.searchResults
-        .setAttribute("style", `right: ${right}`)
+        .setAttribute("style", `right: ${right}px`)
 
     } else if (width >= 500 && width < 768) { //Between tablet and Mobile
       elementRefs.current!.searchResults
-        .setAttribute("style", `left: ${left}; right: ${right}`)
+        .setAttribute("style", `left: ${left}; right: ${right}px`)
 
     } else if (width < 500) { //Mobile
       elementRefs.current!.searchResults

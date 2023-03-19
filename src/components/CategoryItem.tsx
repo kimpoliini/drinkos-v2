@@ -12,8 +12,8 @@ export interface ICategoryItem {
 const CategoryItem: FC<ICategoryItem> = (props) => {
 
     let style = {
-        backgroundColor: props.color ? props.color : "#a8b0c0",
-        color: props.textColor ? props.textColor : "white",
+        backgroundColor: props.color || "#a8b0c0",
+        color: props.textColor || "white",
     }
 
     return (

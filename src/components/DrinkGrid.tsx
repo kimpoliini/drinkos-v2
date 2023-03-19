@@ -98,8 +98,6 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
             char = "&"
         }
 
-
-
         window.history.pushState({}, "", `#${url}${char}p=${pageNumber}`)
         scrollToTop()
 
@@ -119,12 +117,11 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
             <TextLine text={props.title} style={{ fontWeight: "normal" }} color="#404653" lineColor="#a8b0c0" />
             <div className='drink-grid'>
                 {pages[currentPage].length > 0 ? pages[currentPage].map((e: IDrinkListItem, i) => {
-                    return <DrinkListItem key={e.id} id={e.id}
-                        name={e.name} thumbnail={e.thumbnail}
-                        ingredients={e.ingredients}
-                        measurements={e.measurements}
-                        callback={() => { scroll.setValue(window.scrollY) }} />
-                }) : (hasResults ? null : <p>No results</p>)}
+                        e.callback = () => scroll.setValue(window.scrollY)
+
+                        return <DrinkListItem key={e.id} {...e} />
+                        
+                    }) : (hasResults ? null : <p>No results</p>)}
             </div>
             <div className='page-indicator' style={pages.length > 1 ? {} : { display: "none" }}>
                 <span className={`material-icons ${currentPage === 0 ? "indicator-disabled" : ""}`}

@@ -24,6 +24,4 @@ const DrinkListItem: FC<IDrinkListItem> = (props) => {
     )
 }
 
-
-
 export default DrinkListItem
