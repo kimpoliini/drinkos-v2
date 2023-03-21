@@ -3,7 +3,8 @@ import { IDrinkListItem } from "../components/DrinkListItem"
 export const baseUrl = "https://www.thecocktaildb.com/api/json/v2/"
 
 export const getDrinkListFromApiResults = (data: []) => {
-    let drinks: IDrinkListItem[] = data.map((e: any) => {
+    let drinks: IDrinkListItem[] = []
+    if (data) drinks = data.map((e: any) => {
 
         let ingredients: string[] = [],
             measurements: string[] = []

@@ -1,6 +1,5 @@
 .drink-grid {
   display: grid;
-  /* grid-template-columns: repeat(1, 1fr); */
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1.5rem;
   padding-top: 1rem;
@@ -20,6 +19,7 @@
 .page-indicator>span {
   padding: 0.4rem;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .page-indicator>span:not(.material-icons) {
@@ -45,6 +45,10 @@
   .page-indicator>.material-icons:hover:not(.indicator-disabled) {
     background-color: #b7bbca;
     cursor: pointer;
+  }
+
+  .page-indicator>span:hover:not(.current-page) {
+    background-color: rgba(218, 222, 240,0.5);
   }
 }
 

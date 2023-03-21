@@ -19,14 +19,13 @@ const SearchBar: FC = () => {
     let url = `${baseUrl + apiKey}/search.php?s=${query}`
 
     const resp = await (await fetch(url)).json()
-    
+
     return getSearchResultsFromApiResults(resp)
   }, { enabled: Boolean(query) })
 
   useEffect(() => {
     if (data) setDrinks(data)
   }, [data])
-
 
   useEffect(() => {
     let app = document.querySelector(".App")
@@ -117,13 +116,15 @@ const SearchBar: FC = () => {
 
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              navigate(`/search?q=${query}`)
-              setShowResults(false)
-              e.currentTarget.blur()
+              if (query?.trim().length! >= 3){
+                navigate(`/search?q=${query}`)
+                e.currentTarget.blur()
+                setShowResults(false)
+              }
             }
           }} />
         <div>
-          <Link to={`/search?q=${query}`}>
+          <Link to={query?.trim().length! >= 3 ? `/search?q=${query}` : "#"} >
             <img src={require('../assets/icons/search.png')} />
           </Link>
         </div>

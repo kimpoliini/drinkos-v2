@@ -16,7 +16,7 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     const [hasResults, setHasResults] = useState<boolean>(true)
     const [pages, setPages] = useState<[IDrinkListItem[]]>([[]])
     const [currentPage, setCurrentPage] = useState<number>(0)
-    const [searchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const navigationType = useNavigationType()
     const location = useLocation()
@@ -72,10 +72,9 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                 setPages([[]])
                 setHasResults(false)
             }
-
             // Check after loading the data if there is a valid page number 
             // parameter in the URL and sets the current page to that
-            const pageFromUrl = parseInt(searchParams.get("p") || "") - 1 || 0
+            const pageFromUrl = parseInt(searchParams.get("p")!) - 1 || 0
             if (pageFromUrl) setCurrentPage(pageFromUrl)
         }
 
@@ -92,23 +91,32 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
         let url = location.pathname
         let char = '?'
 
-        console.log(location);
-        if (location.search) {
+        let q = searchParams.get("q")
+        let p = searchParams.get("p")
+
+        console.log(q + " " + p);
+        console.log("pageNumber: " + pageNumber);
+
+        if (q && p) {
+            console.log("has both");
+            setSearchParams({ q, p: pageNumber.toString() })
             url += location.search
             char = "&"
+        } else if (q) {
+            console.log("has q");
+            setSearchParams({ q, p: pageNumber.toString() })
+        } else {
+            setSearchParams({ p: pageNumber.toString() })
         }
-
-        window.history.pushState({}, "", `#${url}${char}p=${pageNumber}`)
         scrollToTop()
-
     }
 
-    const decPage = () => {
-        if (currentPage > 0) setCurrentPage(currentPage - 1)
+    const decPage = (toPage: number = currentPage -1) => {
+        if (currentPage > 0) setCurrentPage(toPage)
         replaceUrl(currentPage)
     }
-    const incPage = () => {
-        if (currentPage < pages.length - 1) setCurrentPage(currentPage + 1)
+    const incPage = (toPage: number = currentPage + 1) => {
+        if (currentPage < pages.length - 1) setCurrentPage(toPage)
         replaceUrl(currentPage + 2)
     }
 
@@ -117,11 +125,11 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
             <TextLine text={props.title} style={{ fontWeight: "normal" }} color="#404653" lineColor="#a8b0c0" />
             <div className='drink-grid'>
                 {pages[currentPage].length > 0 ? pages[currentPage].map((e: IDrinkListItem, i) => {
-                        e.callback = () => scroll.setValue(window.scrollY)
+                    e.callback = () => scroll.setValue(window.scrollY)
 
-                        return <DrinkListItem key={e.id} {...e} />
-                        
-                    }) : (hasResults ? null : <p>No results</p>)}
+                    return <DrinkListItem key={e.id} {...e} />
+
+                }) : (hasResults ? null : <p>No results</p>)}
             </div>
             <div className='page-indicator' style={pages.length > 1 ? {} : { display: "none" }}>
                 <span className={`material-icons ${currentPage === 0 ? "indicator-disabled" : ""}`}
@@ -129,7 +137,15 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                     keyboard_arrow_left
                 </span>
                 {[...Array(pages.length)].map((e, i) => (
-                    <span key={i} className={currentPage === i ? "current-page" : ""}>{i + 1}</span>
+                    <span key={i} className={currentPage === i ? "current-page" : ""}
+                        onClick={() => {
+                            if (i < currentPage) {
+                                decPage(i)
+                            } else if (i > currentPage) {
+                                incPage(i)
+                            }
+
+                        }}>{i + 1}</span>
                 ))}
                 <span className={`material-icons ${currentPage === pages.length - 1 ? "indicator-disabled" : ""}`}
                     onClick={() => incPage()}>
