@@ -1,19 +1,32 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import './searchBar.css'
 import { IDrinkListItem } from './DrinkListItem';
-import { baseUrl, getDrinksFromUrl } from '../config/api';
+import { baseUrl, getSearchResultsFromApiResults } from '../config/api';
 import { apiKey } from '../config/apiKey';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 const SearchBar: FC = () => {
 
   const [drinks, setDrinks] = useState<IDrinkListItem[]>([])
   const [showResults, setShowResults] = useState<boolean>(true)
-  // const [hasQuery, setHasQuery] = useState<boolean>(false)
-  const [query, setQuery] = useState<string>("")
+  const [query, setQuery] = useState<string | undefined>(undefined)
   const elementRefs = useRef<{ app: Element; searchResults: Element }>()
   let { id } = useParams()
   const navigate = useNavigate()
+
+  const { data, isLoading } = useQuery([query], async () => {
+    let url = `${baseUrl + apiKey}/search.php?s=${query}`
+
+    const resp = await (await fetch(url)).json()
+    
+    return getSearchResultsFromApiResults(resp)
+  }, { enabled: Boolean(query) })
+
+  useEffect(() => {
+    if (data) setDrinks(data)
+  }, [data])
+
 
   useEffect(() => {
     let app = document.querySelector(".App")
@@ -95,14 +108,9 @@ const SearchBar: FC = () => {
             let newQuery = e.target.value
             if (newQuery.trim().length >= 3) {
               updateResultsPosition()
-
-              let url = `${baseUrl + apiKey}/search.php?s=${newQuery.trimStart()}`
-              getDrinksFromUrl(url).then(drinks => {
-                setDrinks(drinks)
-                setQuery(newQuery)
-              })
+              if (query !== newQuery) setQuery(newQuery)
             } else {
-              setQuery("")
+              setQuery(undefined)
               setDrinks([])
             }
           }}
@@ -122,7 +130,7 @@ const SearchBar: FC = () => {
       </div>
       <div className={"search-results " + (showResults ? "" : "hidden")}>
         {drinks.length > 0 ? renderSearchResults()
-          : (query !== "" ? <p>No results</p> : null)}
+          : (query && !isLoading ? <p>No results</p> : null)}
       </div>
     </div>
 

@@ -1,49 +1,12 @@
-import axios from "axios"
 import { IDrinkListItem } from "../components/DrinkListItem"
 
 export const baseUrl = "https://www.thecocktaildb.com/api/json/v2/"
-export const getDrinksFromUrl = async (url: string) => {
-    const promise = new Promise<IDrinkListItem[]>((resolve, reject) => {
-        resolve(axios.get(url)
-            .then(resp => {
-                if (!resp.data.drinks || resp.data.drinks === "None Found") return []
-                let drinks: IDrinkListItem[] = resp.data.drinks.map((e: any) => {
-
-                    let ingredients: string[] = []
-                    let measurements: string[] = []
-
-                    for (let i = 0; i < 15; i++) {
-                        let ingredient = e[`strIngredient${i + 1}`]
-                        let measurement = e[`strMeasure${i + 1}`]
-
-                        if (!ingredient && !measurement) break
-
-                        if (ingredient) ingredients.push(ingredient)
-
-                        if (measurement) measurements.push(measurement)
-                    }
-
-                    return {
-                        id: e.idDrink,
-                        name: e.strDrink,
-                        thumbnail: e.strDrinkThumb,
-                        ingredients: ingredients,
-                        measurements: measurements,
-                    }
-                })
-
-                return drinks
-            })
-        )
-    })
-    return promise
-}
 
 export const getDrinkListFromApiResults = (data: []) => {
     let drinks: IDrinkListItem[] = data.map((e: any) => {
-    
-        let ingredients: string[] = []
-        let measurements: string[] = []
+
+        let ingredients: string[] = [],
+            measurements: string[] = []
 
         for (let i = 0; i < 15; i++) {
             let ingredient = e[`strIngredient${i + 1}`]
@@ -60,10 +23,65 @@ export const getDrinkListFromApiResults = (data: []) => {
             id: e.idDrink,
             name: e.strDrink,
             thumbnail: e.strDrinkThumb,
-            ingredients: ingredients,
-            measurements: measurements,
+            ingredients,
+            measurements,
         }
     })
 
     return drinks
+}
+
+export const getSearchResultsFromApiResults = (data: any) => {
+    let d = data.drinks, drinks: IDrinkListItem[] = []
+
+    if (d) {
+        drinks = d.map((e: any) => {
+            return {
+                id: e.idDrink,
+                name: e.strDrink,
+                category: e.strCategory
+            }
+        })
+    }
+
+    return drinks
+}
+
+export const getDrinkInfoFromApiResults = (data: any) => {
+    let d = data.drinks[0]
+
+    let ingredients: string[] = [],
+        measurements: string[] = [],
+        tags: string[] = []
+
+    // Turns each individual ingredient and measurements
+    // into an array
+    for (let i = 0; i < 15; i++) {
+        let ingredient = d[`strIngredient${i + 1}`]
+        let measurement = d[`strMeasure${i + 1}`]
+
+        if (!ingredient && !measurement) break
+
+        if (ingredient) ingredients.push(ingredient)
+
+        if (measurement) measurements.push(measurement)
+    }
+
+    // Turns all tags into an array
+    if (d.strTags) {
+        tags = d.strTags.split(",").map((e: string) => e[0].toUpperCase() + e.slice(1));
+    }
+
+    return {
+        id: d.idDrink,
+        name: d.strDrink,
+        ingredients,
+        measurements,
+        image: d.strDrinkThumb,
+        instructions: d.strInstructions,
+        glassType: d.strGlass,
+        category: d.strCategory,
+        alcoholic: d.strAlcoholic,
+        tags,
+    }
 }

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { IDrinkListItem } from '../components/DrinkListItem'
 import TagItem from '../components/TagItem'
 import TextLine from '../components/TextLine'
-import { baseUrl } from '../config/api'
+import { baseUrl, getDrinkInfoFromApiResults } from '../config/api'
 import { apiKey } from '../config/apiKey'
 import './drinkInfo.css'
 import ColorThief from 'colorthief'
@@ -12,7 +12,6 @@ import { useQuery } from 'react-query'
 export interface IFullDrinkInfo extends IDrinkListItem {
     image: string,
     alcoholic?: string,
-    category?: string,
     glassType?: string,
     instructions: string,
     tags?: string[],
@@ -41,49 +40,7 @@ function DrinkInfo() {
     }, [isLoading])
 
     useEffect(() => {
-        if (data) {
-            console.log(data.drinks[0]);
-
-            let d = data.drinks[0]
-            let drink: IFullDrinkInfo
-
-            let ingredients: string[] = []
-            let measurements: string[] = []
-
-            let tags: string[] = []
-
-            // Turns each individual ingredient and measurements
-            // into an array
-            for (let i = 0; i < 15; i++) {
-                let ingredient = d[`strIngredient${i + 1}`]
-                let measurement = d[`strMeasure${i + 1}`]
-
-                if (!ingredient && !measurement) break
-
-                if (ingredient) ingredients.push(ingredient)
-
-                if (measurement) measurements.push(measurement)
-            }
-
-            // Turns all tags into an array
-            if (d.strTags) {
-                tags = d.strTags.split(",").map((e: string) => e.charAt(0).toUpperCase() + e.slice(1, e.length));
-            }
-
-            drink = {
-                id: d.idDrink,
-                name: d.strDrink,
-                ingredients: ingredients,
-                measurements: measurements,
-                image: d.strDrinkThumb,
-                instructions: d.strInstructions,
-                glassType: d.strGlass,
-                category: d.strCategory,
-                alcoholic: d.strAlcoholic,
-                tags: tags,
-            }
-            setDrink(drink)
-        }
+        if (data) setDrink(getDrinkInfoFromApiResults(data))
     }, [data])
 
     const formatMeasure = (measure: string) => {
@@ -95,7 +52,7 @@ function DrinkInfo() {
             case "top":
                 return "Top with"
             default:
-                return measure.charAt(0).toUpperCase() + measure.slice(1)
+                return measure[0].toUpperCase() + measure.slice(1)
         }
     }
 
@@ -123,8 +80,8 @@ function DrinkInfo() {
             <div className='ingredients'>
                 <h3>Ingredients</h3>
                 <ul>
-                    {drink?.ingredients.map((e: string, i) =>
-                        <li key={i}>{`${drink?.measurements[i] ? formatMeasure(drink?.measurements[i]) : ""} ${e}`}</li>
+                    {drink?.ingredients!.map((e: string, i) =>
+                        <li key={i}>{`${drink?.measurements![i] ? formatMeasure(drink?.measurements[i]) : ""} ${e}`}</li>
                     )}
                 </ul>
 
