@@ -20,7 +20,7 @@ img {
 }
 
 a {
-  color: inherit; 
+  color: inherit;
   text-decoration: none;
 }
 
@@ -84,21 +84,29 @@ footer {
 footer>div {
   color: lightgray;
   max-width: 1024px;
-  margin: 0 auto 0 auto;  
+  margin: 0 auto 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+footer a {
+  margin: 0.2rem 0 0.2rem 0;
+  text-decoration: none;
+  color: #3cb6ee;
+  width: fit-content;
 }
 
 footer p {
   margin: 0.25rem 0 0.25rem 0;
 }
 
-footer a {
-  text-decoration: underline;
-  color: teal;
-}
-
 @media screen and (hover: hover) {
   html {
     width: 100vw;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
   }
 }
 

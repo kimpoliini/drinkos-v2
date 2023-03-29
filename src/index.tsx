@@ -15,6 +15,9 @@ import Browse from './pages/Browse';
 import BrowseContent from './pages/BrowseContent';
 import { QueryClientProvider } from 'react-query';
 import { QueryClient } from 'react-query';
+import About from './pages/footer/About';
+import Contact from './pages/footer/Contact';
+import SuggestChange from './pages/footer/SuggestChange';
 
 const client = new QueryClient()
 
@@ -46,6 +49,18 @@ const router = createHashRouter([
       {
         path: "/browse/:type/:subtype",
         element: <BrowseContent />,
+      },
+      {
+        path: "/about/",
+        element: <About />,
+      },
+      {
+        path: "/contact/",
+        element: <Contact />,
+      },
+      {
+        path: "/suggestchange/",
+        element: <SuggestChange />,
       },
     ]
   }

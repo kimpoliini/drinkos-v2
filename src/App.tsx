@@ -30,9 +30,9 @@ const App: FC = () => {
 
       <footer>
         <div>
-          <p>About</p>
-          <p>Contact</p>
-          <p>Suggest a change</p>
+          <Link to={'/about'}>About</Link>
+          <Link to={'/contact'}>Contact</Link>
+          <Link to={'/suggestchange'}>Suggest a change</Link>
           <p>Results provided by <a href="https://www.thecocktaildb.com/">TheCocktailDB</a></p>
         </div>
       </footer>
