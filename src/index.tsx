@@ -18,6 +18,7 @@ import { QueryClient } from 'react-query';
 import About from './pages/footer/About';
 import Contact from './pages/footer/Contact';
 import SuggestChange from './pages/footer/SuggestChange';
+import RandomDrink from './pages/footer/RandomDrink';
 
 const client = new QueryClient()
 
@@ -61,6 +62,10 @@ const router = createHashRouter([
       {
         path: "/suggestchange/",
         element: <SuggestChange />,
+      },
+      {
+        path: "/randomdrink/",
+        element: <RandomDrink />,
       },
     ]
   }

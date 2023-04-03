@@ -33,7 +33,10 @@ const App: FC = () => {
           <Link to={'/about'}>About</Link>
           <Link to={'/contact'}>Contact</Link>
           <Link to={'/suggestchange'}>Suggest a change</Link>
+
+          <p>Take me to a <Link to={'/randomdrink'}>random drink</Link></p>
           <p>Results provided by <a href="https://www.thecocktaildb.com/">TheCocktailDB</a></p>
+          <br />
         </div>
       </footer>
     </div>
