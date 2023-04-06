@@ -35,7 +35,7 @@ const App: FC = () => {
           <Link to={'/suggestchange'}>Suggest a change</Link>
 
           <p>Take me to a <Link to={'/randomdrink'}>random drink</Link></p>
-          <p>Results provided by <a href="https://www.thecocktaildb.com/">TheCocktailDB</a></p>
+          <p>Results provided by <a href="https://www.thecocktaildb.com/" rel='nofollow'>TheCocktailDB</a></p>
           <br />
         </div>
       </footer>

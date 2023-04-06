@@ -4,6 +4,8 @@ import IconWithText from '../../components/IconWithText'
 import "./footerPage.css"
 
 function Contact() {
+  document.title = "Contact" + " | Drinkos"
+
   return (
     <div>
       <h2>Contact</h2>

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import './footerPage.css'
 
 const About = () => {
+    document.title = "About" + " | Drinkos"
+
     return (
         <div>
             <h2>About Drinkos</h2>
@@ -13,7 +15,7 @@ const About = () => {
                 in 2020. I decided after my studies that I wanted to create a full website from that first draft,
                 and set out to create this new version of Drinkos.
                 <br /><br />
-                Drinkos is made using React, using results from <a href="https://www.thecocktaildb.com/">TheCocktailDB</a>.
+                Drinkos is made using React, using results from <a href="https://www.thecocktaildb.com/" rel='nofollow'>TheCocktailDB</a>.
             </p>
             <h3>Goal</h3>
             <p>
@@ -41,7 +43,7 @@ const About = () => {
                 development!
                 <br />
                 <br />
-                <a href='https://ko-fi.com/E1E1JWRE0' target='_blank'><img height='36' style={{ border: "0px;height:36px;", width: "auto" }} src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' alt='Buy Me a Coffee at ko-fi.com' /></a>
+                <a href='https://ko-fi.com/E1E1JWRE0' target='_blank' rel='nofollow'><img height='36' style={{ border: "0px;height:36px;", width: "auto" }} src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' alt='Buy Me a Coffee at ko-fi.com' /></a>
                 <br />
                 If you want to be listed as a donator on this site, include it in the
                 message on Ko-fi.

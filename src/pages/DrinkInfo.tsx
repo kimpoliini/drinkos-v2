@@ -40,7 +40,12 @@ function DrinkInfo() {
     }, [isLoading])
 
     useEffect(() => {
-        if (data) setDrink(getDrinkInfoFromApiResults(data))
+        if (data) {
+            setDrink(getDrinkInfoFromApiResults(data))
+            console.log(data.drinks[0].strDrink);
+            
+            document.title = data.drinks[0].strDrink + " | Drinkos"
+        }
     }, [data])
 
     const formatMeasure = (measure: string) => {

@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect, useRef, useState } from 'react'
-import { getDrinkListFromApiResults } from '../config/api'
+import { capitalize, getDrinkListFromApiResults } from '../config/api'
 import DrinkListItem, { IDrinkListItem } from './DrinkListItem'
 import TextLine from './TextLine'
 import './drinkGrid.css'
@@ -39,11 +39,25 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     useEffect(() => {
         if (prevLocation.current?.pathname !== location.pathname) setPages([[]])
 
+        console.log(location);
+        let query = searchParams.get("q")
+
+        if (query) {
+            document.title = "Search results" + " | Drinkos"
+        } else if (location.pathname.indexOf("latest") !== -1) {
+            document.title = "Latest drinks | Drinkos"
+        } else if (location.pathname.indexOf("browse/") !== -1) {
+            document.title = decodeURIComponent(capitalize(location.pathname.split("/")[3])) + " | Drinkos"
+        }
+        else {
+            document.title = "Home | Drinkos"
+        }
+
         prevLocation.current = location
     }, [location])
 
     useEffect(() => {
-        console.log(location);
+
 
         if (data) {
             let drinks = getDrinkListFromApiResults(data.drinks)
@@ -111,7 +125,7 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
         scrollToTop()
     }
 
-    const decPage = (toPage: number = currentPage -1) => {
+    const decPage = (toPage: number = currentPage - 1) => {
         if (currentPage > 0) setCurrentPage(toPage)
         replaceUrl(currentPage)
     }

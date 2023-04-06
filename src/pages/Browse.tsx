@@ -8,6 +8,8 @@ const Browse = () => {
   const [showAllGlasses, setShowAllGlasses] = useState<boolean>(false)
   const categoryListLength = 5
 
+  document.title = "Browse | Drinkos"
+
   const alcoholContent = [
     "Alcoholic",
     "Non alcoholic",

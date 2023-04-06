@@ -26,7 +26,8 @@ const IconWithText: FC<IIconWithText> = (props) => {
     return (
         <a href={props.link}
             style={props.link ? {} : { color: "inherit", cursor: "auto" }}
-            className='icon'>
+            className='icon'
+            rel='nofollow'>
             <img src={props.src}
                 alt={props.text}
                 style={{
