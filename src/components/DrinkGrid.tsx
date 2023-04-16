@@ -3,7 +3,7 @@ import { capitalize, getDrinkListFromApiResults } from '../config/api'
 import DrinkListItem, { IDrinkListItem } from './DrinkListItem'
 import TextLine from './TextLine'
 import './drinkGrid.css'
-import { useQuery } from 'react-query'
+import { isError, useQuery } from 'react-query'
 import { Location, useLocation, useNavigate, useNavigationType, useParams, useSearchParams, } from 'react-router-dom'
 import { ScrollContext } from '../config/ScrollContext'
 
@@ -17,15 +17,47 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     const [pages, setPages] = useState<[IDrinkListItem[]]>([[]])
     const [currentPage, setCurrentPage] = useState<number>(0)
     const [searchParams, setSearchParams] = useSearchParams()
+    const [isError, setIsError] = useState<boolean>(false)
 
     const navigationType = useNavigationType()
     const location = useLocation()
     const prevLocation = useRef<Location>()
     let scroll = useContext(ScrollContext)
 
-    const { data, isLoading } = useQuery("data" + props.url, async () => {
-        const resp = await fetch(props.url)
-        return await resp.json()
+    const { data } = useQuery("data" + props.url, async () => {
+
+        return fetch(props.url).then(resp => {
+            if (resp.ok) {
+                if(isError) setIsError(false)
+                return resp.json()
+            }
+            // throw new Error()
+        }).catch(() => setIsError(true))
+        // .catch(err => console.log(err))
+        // console.log(await data);
+
+        // return await data
+
+        // return resp.json()
+
+        // let resp: Response
+
+        // try {
+        //     resp = await fetch(props.url)
+
+        // } catch (err) {
+        //     console.log("error: " + err);
+
+        //     // return Promise.reject(err)
+        //     throw new Error("")
+        // }
+
+        // if (resp?.ok) {
+        //     console.log("ok");
+        //     return await resp.json()
+        // } else {
+        //     console.log("not ok");
+        // }
     })
 
     // Restore scroll if navigating back
@@ -39,7 +71,6 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     useEffect(() => {
         if (prevLocation.current?.pathname !== location.pathname) setPages([[]])
 
-        console.log(location);
         let query = searchParams.get("q")
 
         if (query) {
@@ -57,8 +88,6 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     }, [location])
 
     useEffect(() => {
-
-
         if (data) {
             let drinks = getDrinkListFromApiResults(data.drinks)
             let perPage = 25
@@ -102,22 +131,12 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     }
 
     function replaceUrl(pageNumber: number) {
-        let url = location.pathname
-        let char = '?'
-
         let q = searchParams.get("q")
         let p = searchParams.get("p")
 
-        console.log(q + " " + p);
-        console.log("pageNumber: " + pageNumber);
-
         if (q && p) {
-            console.log("has both");
             setSearchParams({ q, p: pageNumber.toString() })
-            url += location.search
-            char = "&"
         } else if (q) {
-            console.log("has q");
             setSearchParams({ q, p: pageNumber.toString() })
         } else {
             setSearchParams({ p: pageNumber.toString() })
@@ -136,7 +155,10 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
 
     return (
         <div>
-            <TextLine text={props.title} style={{ fontWeight: "normal" }} color="#404653" lineColor="#a8b0c0" />
+            {(!isError || pages[currentPage].length > 0) ?
+                <TextLine text={props.title} style={{ fontWeight: "normal" }} color="#404653" lineColor="#a8b0c0" />
+                : <p> Could not load page, please try again later. </p>
+            }
             <div className='drink-grid'>
                 {pages[currentPage].length > 0 ? pages[currentPage].map((e: IDrinkListItem, i) => {
                     e.callback = () => scroll.setValue(window.scrollY)

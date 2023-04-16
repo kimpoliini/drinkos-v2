@@ -82,7 +82,7 @@ const SearchBar: FC = () => {
 
     if (showMore) {
       results.push(
-        <Link to={`/search?q=${query}`} key={arr.length + 1} className="search-result-item">
+        <Link to={`/search?q=${query}`} key={arr.length + 1} className="search-result-item" onClick={() => setShowResults(false)}>
           <p style={{ textAlign: "center" }}>Show all {drinks.length} results</p>
         </Link>
       )
@@ -116,7 +116,7 @@ const SearchBar: FC = () => {
 
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              if (query?.trim().length! >= 3){
+              if (query?.trim().length! >= 3) {
                 navigate(`/search?q=${query}`)
                 e.currentTarget.blur()
                 setShowResults(false)
