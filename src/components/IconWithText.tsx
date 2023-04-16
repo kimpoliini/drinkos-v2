@@ -27,11 +27,12 @@ const IconWithText: FC<IIconWithText> = (props) => {
         <a href={props.link}
             style={props.link ? {} : { color: "inherit", cursor: "auto" }}
             className='icon'
+            target='_blank'
             rel='nofollow'>
             <img src={props.src}
                 alt={props.text}
                 style={{
-                    height: wh + "px", width: wh + "px",
+                    height: wh + "px", width: wh + "px", 
                 }}
             />
 

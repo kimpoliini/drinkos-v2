@@ -28,6 +28,10 @@ function Contact() {
         src={require("../../assets/icons/website.png")}
         link="https://kimpoliini.github.io/portfolio/"
         text='Personal website/portfolio' />
+      <IconWithText
+        src={require("../../assets/icons/twitter.png")}
+        link="https://twitter.com/kimpoliini"
+        text='Twitter - kimpoliini' />
     </div>
   )
 }

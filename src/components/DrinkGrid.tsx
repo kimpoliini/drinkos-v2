@@ -25,39 +25,12 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     let scroll = useContext(ScrollContext)
 
     const { data } = useQuery("data" + props.url, async () => {
-
         return fetch(props.url).then(resp => {
             if (resp.ok) {
                 if(isError) setIsError(false)
                 return resp.json()
             }
-            // throw new Error()
         }).catch(() => setIsError(true))
-        // .catch(err => console.log(err))
-        // console.log(await data);
-
-        // return await data
-
-        // return resp.json()
-
-        // let resp: Response
-
-        // try {
-        //     resp = await fetch(props.url)
-
-        // } catch (err) {
-        //     console.log("error: " + err);
-
-        //     // return Promise.reject(err)
-        //     throw new Error("")
-        // }
-
-        // if (resp?.ok) {
-        //     console.log("ok");
-        //     return await resp.json()
-        // } else {
-        //     console.log("not ok");
-        // }
     })
 
     // Restore scroll if navigating back
