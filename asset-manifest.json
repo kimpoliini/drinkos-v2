@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/drinkos-v2/static/css/main.2ca2a7e7.css",
-    "main.js": "/drinkos-v2/static/js/main.fccaf0fa.js",
-    "static/js/787.4fe4bfb3.chunk.js": "/drinkos-v2/static/js/787.4fe4bfb3.chunk.js",
-    "static/media/AustrProBolIta.otf": "/drinkos-v2/static/media/AustrProBolIta.7b42cb79a331e4e5678c.otf",
-    "index.html": "/drinkos-v2/index.html",
-    "main.2ca2a7e7.css.map": "/drinkos-v2/static/css/main.2ca2a7e7.css.map",
-    "main.fccaf0fa.js.map": "/drinkos-v2/static/js/main.fccaf0fa.js.map",
-    "787.4fe4bfb3.chunk.js.map": "/drinkos-v2/static/js/787.4fe4bfb3.chunk.js.map"
+    "main.css": "/static/css/main.7198c280.css",
+    "main.js": "/static/js/main.bf361bcc.js",
+    "static/js/787.4fe4bfb3.chunk.js": "/static/js/787.4fe4bfb3.chunk.js",
+    "static/media/AustrProBolIta.otf": "/static/media/AustrProBolIta.7b42cb79a331e4e5678c.otf",
+    "index.html": "/index.html",
+    "main.7198c280.css.map": "/static/css/main.7198c280.css.map",
+    "main.bf361bcc.js.map": "/static/js/main.bf361bcc.js.map",
+    "787.4fe4bfb3.chunk.js.map": "/static/js/787.4fe4bfb3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2ca2a7e7.css",
-    "static/js/main.fccaf0fa.js"
+    "static/css/main.7198c280.css",
+    "static/js/main.bf361bcc.js"
   ]
 }
