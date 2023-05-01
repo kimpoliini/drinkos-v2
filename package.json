@@ -1,7 +1,7 @@
 {
-  "homepage": "https://kimpoliini.github.io/drinkos-v2/",
+  "homepage": "https://drinkos.net",
   "name": "drinkos-v2",
-  "version": "0.1.0",
+  "version": "1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
