@@ -48,11 +48,11 @@
   }
 
   .page-indicator>span:hover:not(.current-page) {
-    background-color: rgba(218, 222, 240,0.5);
+    background-color: rgba(218, 222, 240, 0.5);
   }
 }
 
-@media screen and (min-width: 375px) {
+@media screen and (max-width: 600px) {
   .drink-grid {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
