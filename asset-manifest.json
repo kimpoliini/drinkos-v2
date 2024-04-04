@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.7198c280.css",
-    "main.js": "/static/js/main.bf361bcc.js",
+    "main.js": "/static/js/main.09377cdb.js",
     "static/js/787.4fe4bfb3.chunk.js": "/static/js/787.4fe4bfb3.chunk.js",
     "static/media/AustrProBolIta.otf": "/static/media/AustrProBolIta.7b42cb79a331e4e5678c.otf",
     "index.html": "/index.html",
     "main.7198c280.css.map": "/static/css/main.7198c280.css.map",
-    "main.bf361bcc.js.map": "/static/js/main.bf361bcc.js.map",
+    "main.09377cdb.js.map": "/static/js/main.09377cdb.js.map",
     "787.4fe4bfb3.chunk.js.map": "/static/js/787.4fe4bfb3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7198c280.css",
-    "static/js/main.bf361bcc.js"
+    "static/js/main.09377cdb.js"
   ]
 }
