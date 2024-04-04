@@ -42,9 +42,10 @@ function DrinkInfo() {
     useEffect(() => {
         if (data) {
             setDrink(getDrinkInfoFromApiResults(data))
-            console.log(data.drinks[0].strDrink);
             
+            //update metadata
             document.title = data.drinks[0].strDrink + " | Drinkos"
+            document.getElementsByTagName('meta').namedItem("description")!.content = data.drinks[0].strInstructions
         }
     }, [data])
 

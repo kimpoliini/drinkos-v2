@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import CategoryItem from '../components/CategoryItem'
 import './browse.css'
+import { strings } from '../config/strings'
 
 const Browse = () => {
 
@@ -9,6 +10,7 @@ const Browse = () => {
   const categoryListLength = 5
 
   document.title = "Browse | Drinkos"
+  document.getElementsByTagName('meta').namedItem("description")!.content = strings.metaDescription
 
   const alcoholContent = [
     "Alcoholic",
