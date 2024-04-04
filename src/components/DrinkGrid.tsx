@@ -27,7 +27,7 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
     const { data } = useQuery("data" + props.url, async () => {
         return fetch(props.url).then(resp => {
             if (resp.ok) {
-                if(isError) setIsError(false)
+                if (isError) setIsError(false)
                 return resp.json()
             }
         }).catch(() => setIsError(true))

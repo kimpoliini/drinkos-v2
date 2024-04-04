@@ -42,7 +42,7 @@ function DrinkInfo() {
     useEffect(() => {
         if (data) {
             setDrink(getDrinkInfoFromApiResults(data))
-            
+
             //update metadata
             document.title = data.drinks[0].strDrink + " | Drinkos"
             document.getElementsByTagName('meta').namedItem("description")!.content = data.drinks[0].strInstructions
@@ -68,7 +68,9 @@ function DrinkInfo() {
             <TextLine text={drink?.name || ""} color="#404653" lineColor="#a8b0c0"
                 style={{ fontWeight: "normal" }} />
             <img id="drink-image"
-                src={drink?.image} alt={drink?.name}
+                src={drink?.image}
+                alt={drink?.name}
+                title={drink?.name}
                 className={imageLoaded ? "" : "image-loading"}
                 onLoad={async (e) => {
                     let img = (e.target as HTMLImageElement)
