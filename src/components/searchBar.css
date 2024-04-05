@@ -47,7 +47,9 @@ input {
 .search-result-item p {
     margin: 0;
     text-align: left;
+    vertical-align: middle;
     padding: 0.5rem 1rem 0.5rem;
+    font-size: 11pt;
 }
 
 @media screen and (hover:hover) {
