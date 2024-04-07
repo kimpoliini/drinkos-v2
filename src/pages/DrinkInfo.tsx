@@ -8,6 +8,7 @@ import { apiKey } from '../config/apiKey'
 import './drinkInfo.css'
 import ColorThief from 'colorthief'
 import { useQuery } from 'react-query'
+import { Adsense } from '@ctrl/react-adsense'
 
 export interface IFullDrinkInfo extends IDrinkListItem {
     image: string,
@@ -106,6 +107,11 @@ function DrinkInfo() {
                     big
                     color={"#a8b0c0"} />
             </div> : null}
+            <Adsense client='ca-pub-5009254650622531' slot='4409478771'
+                format='fluid'
+                layout='in-article'
+                style={{ display: "block" }}
+            />
         </div>
     )
 }

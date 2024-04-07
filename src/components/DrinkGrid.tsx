@@ -6,6 +6,7 @@ import './drinkGrid.css'
 import { isError, useQuery } from 'react-query'
 import { Location, useLocation, useNavigate, useNavigationType, useParams, useSearchParams, } from 'react-router-dom'
 import { ScrollContext } from '../config/ScrollContext'
+import { Adsense } from '@ctrl/react-adsense'
 
 export interface IDrinkGrid {
     title: string,
@@ -161,6 +162,11 @@ const DrinkGrid: FC<IDrinkGrid> = (props) => {
                     keyboard_arrow_right
                 </span>
             </div>
+            <Adsense client='ca-pub-5009254650622531' slot='4409478771'
+                format='fluid'
+                layout='in-article'
+                style={{ display: "block" }}
+            />
         </div>)
 }
 
