@@ -1,4 +1,4 @@
-import { IDrinkListItem } from "../components/DrinkListItem"
+import { IDrinkListItem } from "../components"
 import { strings } from "./strings"
 
 export const baseUrl = "https://www.thecocktaildb.com/api/json/v2/"
