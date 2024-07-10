@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { CategoryItem } from '../components/'
-import { strings } from '../config/strings'
+import { strings } from '../config'
 import './browse.css'
 
 const Browse = () => {

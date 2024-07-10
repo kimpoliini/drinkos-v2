@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { IDrinkListItem, TagItem, TextLine } from '../components'
-import { baseUrl, getDrinkInfoFromApiResults } from '../config/api'
-import { apiKey } from '../config/apiKey'
-import ColorThief from 'colorthief'
+import { baseUrl, getDrinkInfoFromApiResults, apiKey } from '../config'
 import { useQuery } from 'react-query'
-import { Adsense } from '@ctrl/react-adsense'
+import ColorThief from 'colorthief'
 import './drinkInfo.css'
 
 export interface IFullDrinkInfo extends IDrinkListItem {
@@ -105,11 +103,6 @@ function DrinkInfo() {
                     big
                     color={"#a8b0c0"} />
             </div> : null}
-            <Adsense client='ca-pub-5009254650622531' slot='4409478771'
-                format='fluid'
-                layout='in-article'
-                style={{ display: "block" }}
-            />
         </div>
     )
 }

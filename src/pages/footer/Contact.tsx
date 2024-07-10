@@ -1,6 +1,5 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import IconWithText from '../../components/IconWithText/IconWithText'
+import { IconWithText } from '../../components'
 import "./footerPage.css"
 
 function Contact() {
@@ -23,7 +22,7 @@ function Contact() {
         src={require("../../assets/icons/github.png")}
         link="https://github.com/kimpoliini"
         text='GitHub - kimpoliini' />
-        
+
       <IconWithText
         src={require("../../assets/icons/website.png")}
         link="https://kimpoliini.github.io/portfolio/"

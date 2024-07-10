@@ -1,8 +1,7 @@
 import { FC } from 'react'
 import { useParams } from 'react-router-dom'
 import { DrinkGrid } from '../components'
-import { baseUrl } from '../config/api'
-import { apiKey } from '../config/apiKey'
+import { baseUrl, apiKey } from '../config/'
 
 const BrowseContent: FC = () => {
 

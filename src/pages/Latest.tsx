@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import { DrinkGrid } from '../components'
-import { baseUrl } from '../config/api'
-import { apiKey } from '../config/apiKey'
+import { apiKey, baseUrl } from '../config'
 
 const Latest: FC = () => {
     return (

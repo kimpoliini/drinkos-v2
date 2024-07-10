@@ -1,8 +1,8 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import './App.css';
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { ScrollContext } from './config/ScrollContext';
+import { ScrollContext } from './config';
 import { SearchBar } from './components';
+import './App.css';
 
 const App: FC = () => {
   const [value, setValue] = useState<number>(0)

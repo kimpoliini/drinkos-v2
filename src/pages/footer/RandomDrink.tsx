@@ -1,6 +1,6 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { apiKey } from '../../config/apiKey';
+import { apiKey } from '../../config';
 
 const RandomDrink: FC = () => {
     const [message, setMessage] = useState<string>("Getting your drink...")

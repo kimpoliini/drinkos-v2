@@ -1,8 +1,7 @@
 import { FC } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import { DrinkGrid } from '../components';
-import { baseUrl } from '../config/api';
-import { apiKey } from '../config/apiKey';
+import { apiKey, baseUrl } from '../config';
 
 const Search: FC = () => {
     const [searchParams] = useSearchParams();
