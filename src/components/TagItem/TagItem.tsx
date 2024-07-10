@@ -1,13 +1,6 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
+import { ITagItem } from './ITagItem'
 import './tagItem.css'
-
-export interface ITagItem {
-    title: string,
-    color?: string,
-    big?: boolean,
-    icon?: string,
-    iconColor?: string,
-}
 
 const TagItem: FC<ITagItem> = ({ title, color, big, icon, iconColor }) => {
 

@@ -1,20 +1,18 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Home from './pages/Home';
 import {
   RouterProvider,
   createHashRouter,
 } from "react-router-dom";
+import { QueryClientProvider,QueryClient } from 'react-query';
+import Home from './pages/Home';
 import DrinkInfo from './pages/DrinkInfo';
 import Latest from './pages/Latest';
 import Search from './pages/Search';
 import Browse from './pages/Browse';
 import BrowseContent from './pages/BrowseContent';
-import { QueryClientProvider } from 'react-query';
-import { QueryClient } from 'react-query';
 import About from './pages/footer/About';
 import Contact from './pages/footer/Contact';
 import SuggestChange from './pages/footer/SuggestChange';

@@ -1,10 +1,12 @@
 import { FC, useEffect, useRef, useState } from 'react'
-import './searchBar.css'
 import { baseUrl, getSearchResultsFromApiResults } from '../../config/api';
 import { apiKey } from '../../config/apiKey';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { IDrinkListItem } from '../DrinkListItem';
+import { IDrinkListItem } from '../index';
+import './searchBar.css'
+
+let searchIcon = require('../../assets/icons/search.png')
 
 const SearchBar: FC = () => {
 
@@ -125,7 +127,7 @@ const SearchBar: FC = () => {
           }} />
         <div>
           <Link to={query?.trim().length! >= 3 ? `/search?q=${query}` : "#"} >
-            <img src={require('../assets/icons/search.png')} />
+            <img src={searchIcon} />
           </Link>
         </div>
       </div>

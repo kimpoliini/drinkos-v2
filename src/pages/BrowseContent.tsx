@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import { useParams } from 'react-router-dom'
-import DrinkGrid from '../components/DrinkGrid'
+import { DrinkGrid } from '../components'
 import { baseUrl } from '../config/api'
 import { apiKey } from '../config/apiKey'
 
@@ -8,7 +8,7 @@ const BrowseContent: FC = () => {
 
     let { type, subtype } = useParams()
 
-    const getUrl = () => {        
+    const getUrl = () => {
         let newUrl = `${baseUrl}${apiKey}/filter.php?`
 
         switch (type) {

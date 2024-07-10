@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useSearchParams } from 'react-router-dom';
-import DrinkGrid from '../components/DrinkGrid';
+import { DrinkGrid } from '../components';
 import { baseUrl } from '../config/api';
 import { apiKey } from '../config/apiKey';
 

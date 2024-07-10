@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import CategoryItem from '../components/CategoryItem'
-import './browse.css'
+import { useState } from 'react'
+import { CategoryItem } from '../components/'
 import { strings } from '../config/strings'
+import './browse.css'
 
 const Browse = () => {
 

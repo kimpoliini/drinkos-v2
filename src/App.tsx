@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import './App.css';
 import { Outlet, Link, useLocation } from "react-router-dom";
-import SearchBar from './components/SearchBar';
 import { ScrollContext } from './config/ScrollContext';
+import { SearchBar } from './components';
 
 const App: FC = () => {
   const [value, setValue] = useState<number>(0)

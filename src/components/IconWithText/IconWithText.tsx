@@ -1,12 +1,6 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
+import { IIconWithText } from './IIconWithText'
 import './iconWithText.css'
-
-export interface IIconWithText {
-    text: string,
-    src: string,
-    size?: string,
-    link?: string,
-}
 
 const IconWithText: FC<IIconWithText> = (props) => {
 

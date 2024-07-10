@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import DrinkGrid from '../components/DrinkGrid'
+import { FC } from 'react'
+import { DrinkGrid } from '../components'
 import { baseUrl } from '../config/api'
 import { apiKey } from '../config/apiKey'
 

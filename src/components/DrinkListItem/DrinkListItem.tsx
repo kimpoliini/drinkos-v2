@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import './drinkListItem.css'
 import { IDrinkListItem } from './IDrinkListItem'
+import './drinkListItem.css'
 
 const DrinkListItem: FC<IDrinkListItem> = (props) => {
     return (

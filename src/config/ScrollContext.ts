@@ -1,6 +1,6 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 
 export const ScrollContext = createContext({
     value: 0,
-    setValue: (value: number) => {}
+    setValue: (value: number) => { }
 })

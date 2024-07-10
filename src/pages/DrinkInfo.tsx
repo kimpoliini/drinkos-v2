@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { IDrinkListItem } from '../components/DrinkListItem/DrinkListItem'
-import TagItem from '../components/TagItem/TagItem'
-import TextLine from '../components/TextLine/TextLine'
+import { IDrinkListItem, TagItem, TextLine } from '../components'
 import { baseUrl, getDrinkInfoFromApiResults } from '../config/api'
 import { apiKey } from '../config/apiKey'
-import './drinkInfo.css'
 import ColorThief from 'colorthief'
 import { useQuery } from 'react-query'
 import { Adsense } from '@ctrl/react-adsense'
+import './drinkInfo.css'
 
 export interface IFullDrinkInfo extends IDrinkListItem {
     image: string,

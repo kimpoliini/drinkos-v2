@@ -1,12 +1,11 @@
-import React, { FC, useContext, useEffect, useRef, useState } from 'react'
-import { capitalize, getDrinkListFromApiResults } from '../config/api'
-import DrinkListItem, { IDrinkListItem } from './DrinkListItem'
-import TextLine from './TextLine'
-import './drinkGrid.css'
-import { isError, useQuery } from 'react-query'
-import { Location, useLocation, useNavigate, useNavigationType, useParams, useSearchParams, } from 'react-router-dom'
-import { ScrollContext } from '../config/ScrollContext'
+import { FC, useContext, useEffect, useRef, useState } from 'react'
+import { capitalize, getDrinkListFromApiResults } from '../../config/api'
+import { DrinkListItem, IDrinkListItem, TextLine, } from '../index'
+import { useQuery } from 'react-query'
+import { Location, useLocation, useNavigationType, useSearchParams, } from 'react-router-dom'
+import { ScrollContext } from '../../config/ScrollContext'
 import { Adsense } from '@ctrl/react-adsense'
+import './drinkGrid.css'
 
 export interface IDrinkGrid {
     title: string,

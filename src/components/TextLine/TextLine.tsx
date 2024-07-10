@@ -1,12 +1,6 @@
-import React, { FC, useEffect } from 'react'
+import { FC, useEffect } from 'react'
+import { ITextLine } from './ITextLine'
 import './textLine.css'
-
-export interface ITextLine {
-    text: string,
-    style?: object,
-    color?: string,
-    lineColor?: string,
-}
 
 const TextLine: FC<ITextLine> = (props) => {
     const textLineStyle = {
@@ -15,7 +9,7 @@ const TextLine: FC<ITextLine> = (props) => {
     }
 
     const customLine = "1px solid" +
-        (props.color ? (props.lineColor || props.color): "black")
+        (props.color ? (props.lineColor || props.color) : "black")
 
     useEffect(() => {
         let span: HTMLElement = document.querySelector(".text-line > span")!
@@ -23,7 +17,7 @@ const TextLine: FC<ITextLine> = (props) => {
     }, [props.text])
 
     return (
-        <h2 className='text-line'style={textLineStyle}>
+        <h2 className='text-line' style={textLineStyle}>
             {props.text !== "" ?
                 <span>
                     {props.text}
