@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { IconWithText } from '../../components'
-import "./footerPage.css"
+import "../footerPage.css"
 
 function Contact() {
   document.title = "Contact" + " | Drinkos"

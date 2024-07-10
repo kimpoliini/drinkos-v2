@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { CategoryItem } from '../components/'
-import { strings } from '../config'
+import { FC, useState } from 'react'
+import { CategoryItem } from '../../components/'
+import { strings } from '../../config'
 import './browse.css'
 
-const Browse = () => {
+const Browse: FC = () => {
 
   const [showAllCategory, setShowAllCategory] = useState<boolean>(false)
   const [showAllGlasses, setShowAllGlasses] = useState<boolean>(false)

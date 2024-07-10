@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import './footerPage.css'
+import '../footerPage.css'
 
 const About = () => {
     document.title = "About" + " | Drinkos"

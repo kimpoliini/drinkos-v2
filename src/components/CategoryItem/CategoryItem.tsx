@@ -1,13 +1,7 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
+import { ICategoryItem } from './ICategoryItem'
 import './categoryItem.css'
-
-export interface ICategoryItem {
-    title: string,
-    type: string,
-    color?: string,
-    textColor?: string,
-}
 
 const CategoryItem: FC<ICategoryItem> = (props) => {
 
