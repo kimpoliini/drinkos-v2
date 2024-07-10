@@ -5,8 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { IDrinkListItem } from '../index';
 import './searchBar.css'
-
-let searchIcon = require('../../assets/icons/search.png')
+import searchIcon from '../../assets/icons/search.png'
 
 const SearchBar: FC = () => {
 

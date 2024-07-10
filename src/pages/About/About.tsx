@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import '../footerPage.css'
 
 const About = () => {
-    document.title = "About" + " | Drinkos"
+    document.title = "About | Drinkos"
 
     return (
         <div>
