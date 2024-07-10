@@ -1,16 +1,7 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import './drinkListItem.css'
-
-export interface IDrinkListItem {
-    id: string,
-    name: string,
-    thumbnail?: string,
-    category?: string,
-    ingredients?: string[],
-    measurements?: string[],
-    callback?: () => void,
-}
+import { IDrinkListItem } from './IDrinkListItem'
 
 const DrinkListItem: FC<IDrinkListItem> = (props) => {
     return (

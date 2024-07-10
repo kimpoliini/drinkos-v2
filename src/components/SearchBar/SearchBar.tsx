@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import './searchBar.css'
-import { IDrinkListItem } from './DrinkListItem';
-import { baseUrl, getSearchResultsFromApiResults } from '../config/api';
-import { apiKey } from '../config/apiKey';
+import { baseUrl, getSearchResultsFromApiResults } from '../../config/api';
+import { apiKey } from '../../config/apiKey';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { IDrinkListItem } from '../DrinkListItem';
 
 const SearchBar: FC = () => {
 

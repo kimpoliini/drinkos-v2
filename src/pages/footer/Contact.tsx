@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import IconWithText from '../../components/IconWithText'
+import IconWithText from '../../components/IconWithText/IconWithText'
 import "./footerPage.css"
 
 function Contact() {
